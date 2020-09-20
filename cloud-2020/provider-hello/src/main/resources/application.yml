@@ -1,0 +1,21 @@
+server:
+  port: 8001   #当前 Eureka Client 服务的端口
+
+info:
+  app:
+    name: provider-hello111   #当前服务在actuator监控中的应用名称
+
+spring:
+  application:
+    name: provider-hello  #当前服务注册在 Eureka Server上的名称
+
+eureka:
+  instance:
+    hostname: mqxu.com    # 主机名
+    prefer-ip-address: true   #是否将当前服务的IP注册到 Eureka Server
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:7001/eureka/
+
+
+
