@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/tabbar/tabbar-1/tabbar-1",
+    "pages/tabbar/tabbar-2/tabbar-2",
+    "pages/tabbar/tabbar-3/tabbar-3"
+  ],
+  "subPackages": [],
+  "window": {
+    "defaultTitle": "share-app",
+    "titleBarColor": "#EC544D",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "textColor": "#8F8F94",
+    "selectedColor": "#f33e54",
+    "backgroundColor": "#f7f3f9",
+    "items": [
+      {
+        "pagePath": "pages/tabbar/tabbar-1/tabbar-1",
+        "name": "首页",
+        "icon": "static/img/tabbar/home.png",
+        "activeIcon": "static/img/tabbar/homeactive.png"
+      },
+      {
+        "pagePath": "pages/tabbar/tabbar-2/tabbar-2",
+        "name": "投稿",
+        "icon": "static/img/tabbar/post.png",
+        "activeIcon": "static/img/tabbar/postactive.png"
+      },
+      {
+        "pagePath": "pages/tabbar/tabbar-3/tabbar-3",
+        "name": "我的",
+        "icon": "static/img/tabbar/me.png",
+        "activeIcon": "static/img/tabbar/meactive.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

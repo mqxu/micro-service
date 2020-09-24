@@ -1,0 +1,20 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: consumer-hello
+
+info:
+  app:
+    name: consumer-hello111
+
+eureka:
+  instance:
+    hostname: mqxu.com    # 主机名
+    prefer-ip-address: true   #是否将当前服务的IP注册到 Eureka Server
+
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:7001/eureka/
+
