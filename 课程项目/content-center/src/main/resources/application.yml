@@ -7,6 +7,8 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+#        namespace: 10e5a9a3-05ce-457f-b2a3-02bcfe1b512d
+
   datasource:
     url: jdbc:mysql://39.98.143.134:3306/content_center
     hikari:
@@ -22,3 +24,12 @@ management:
   endpoint:
     health:
       show-details: always
+
+#user-center:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+ribbon:
+  eager-load:
+    enabled: true
+    clients: user-center

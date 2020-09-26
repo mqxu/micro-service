@@ -60,7 +60,6 @@ public class TestController {
 
         //随机数
         int i = ThreadLocalRandom.current().nextInt(targetUrls.size());
-
         log.info("请求的目标地址：{}",targetUrls.get(i));
         return restTemplate.getForObject(targetUrls.get(i),String.class);
     }

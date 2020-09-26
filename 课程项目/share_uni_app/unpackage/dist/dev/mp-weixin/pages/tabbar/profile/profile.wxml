@@ -1,0 +1,1 @@
+<cu-custom vue-id="3b83b7ca-1" bgColor="bg-gradual-red" isBack="{{false}}" bind:__l="__l" vue-slots="{{['content']}}"><view slot="content">我的</view></cu-custom>
