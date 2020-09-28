@@ -1,16 +1,17 @@
-# share_app
+# 知识分享应用Flutter版
 
-A new Flutter project.
+## 首页
+![首页](https://niit-soft.oss-cn-hangzhou.aliyuncs.com/snapshot/%E9%A6%96%E9%A1%B5.png)
 
-## Getting Started
+## 投稿
+![投稿](https://niit-soft.oss-cn-hangzhou.aliyuncs.com/snapshot/%E6%8A%95%E7%A8%BF.png)
 
-This project is a starting point for a Flutter application.
+## 我的
+- 我的主页
+![我的主页](https://niit-soft.oss-cn-hangzhou.aliyuncs.com/snapshot/%E6%88%91%E7%9A%84.png)
 
-A few resources to get you started if this is your first Flutter project:
+- 我的兑换
+![我的兑换](https://niit-soft.oss-cn-hangzhou.aliyuncs.com/snapshot/%E6%88%91%E7%9A%84%E5%85%91%E6%8D%A2.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- 积分明细
+![积分明细](https://niit-soft.oss-cn-hangzhou.aliyuncs.com/snapshot/%E7%A7%AF%E5%88%86%E6%98%8E%E7%BB%86.png)
