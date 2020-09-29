@@ -17,7 +17,7 @@ public enum AuditStatusEnum {
     /**
      * 审核通过
      */
-    PASS,
+    PASSED,
     /**
      * 审核不通过
      */

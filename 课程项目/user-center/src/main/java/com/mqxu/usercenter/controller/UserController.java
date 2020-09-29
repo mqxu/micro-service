@@ -21,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping(value = "/{id}")
-    public User findById(@PathVariable Integer id) {
+    public User findUserById(@PathVariable Integer id) {
         log.info("我被请求了...");
         return this.userService.findById(id);
     }

@@ -18,7 +18,7 @@ public interface UserCenterFeignClient {
      * @return UserDTO
      */
     @GetMapping("/users/{id}")
-    UserDTO findById(@PathVariable Integer id);
+    UserDTO findUserById(@PathVariable Integer id);
 
     /**
      * hello测试
