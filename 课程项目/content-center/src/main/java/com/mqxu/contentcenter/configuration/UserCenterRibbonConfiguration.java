@@ -8,7 +8,7 @@ import ribbonconfig.RibbonConfiguration;
 /**
  * @author mqxu
  */
-@Configuration
+//@Configuration
 //@RibbonClient(name="user-center",configuration = RibbonConfiguration.class)
 //@RibbonClients(defaultConfiguration =RibbonConfiguration.class )
 public class UserCenterRibbonConfiguration {
