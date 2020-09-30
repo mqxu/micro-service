@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: content-center
+  main:
+    allow-bean-definition-overriding: true
   cloud:
     nacos:
       discovery:
@@ -15,6 +17,12 @@ spring:
       username: root
       password: abc.123
       driver-class-name: com.mysql.cj.jdbc.Driver
+      minimumIdle: 10
+      maximumPoolSize: 10
+      maxLifetime: 1800000
+      idleTimeout: 600000
+      connectionTimeout: 30000
+
 
 management:
   endpoints:
@@ -25,25 +33,39 @@ management:
     health:
       show-details: always
 
-user-center:
-  ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+# 细粒度的配置方式，不支持全局配置文件式写法，Ribbon全局配置只能用Java代码配置
+#user-center:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 
-ribbon:
-  eager-load:
-    enabled: true
-    clients: user-center
+#ribbon饥饿加载，提升首次访问速度
+#ribbon:
+#  eager-load:
+#    enabled: true
+#    clients: user-center
+
+# SpringBoot配置日志的方式
+#logging:
+#  level:
+#    com.mqxu: debug
+
+# feign配置日志
+logging:
+  level:
+    # feign的日志系统是建立在SpringBoot基础上的，此处一定要是debug，否则都不会打印
+    com.mqxu.contentcenter.feignclient.UserCenterFeignClient: debug
+
+# feign细粒度配置
+#feign:
+#  client:
+#    config:
+#     #想要调用的微服务名称
+#      user-center:
+#        loggerLevel: full
 
 #feign:
 #  client:
 #    config:
-#      # 全局配置
+#     #全局配置
 #      default:
 #        loggerLevel: full
-#  httpclient:
-#    # 让feign使用apache httpclient做请求；而不是默认的urlconnection
-#    enabled: true
-#    # feign的最大连接数
-#    max-connections: 200
-#    # feign单个路径的最大连接数
-#    max-connections-per-route: 50

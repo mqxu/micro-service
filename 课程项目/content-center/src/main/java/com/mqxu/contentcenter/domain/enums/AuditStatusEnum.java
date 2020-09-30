@@ -5,6 +5,7 @@ import lombok.Getter;
 
 /**
  * @author mqxu
+ * 审核状态枚举
  */
 
 @Getter

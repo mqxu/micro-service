@@ -1,9 +1,13 @@
 package com.mqxu.contentcenter;
 
+import com.mqxu.contentcenter.domain.dto.UserDTO;
+import com.mqxu.contentcenter.feignclient.TestBaiduFeignClient;
+import com.mqxu.contentcenter.feignclient.TestUserCenterFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +31,8 @@ public class TestController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+
 
     /**
      * 测试服务发现，证明内容中心总能找到用户中心
@@ -68,5 +74,19 @@ public class TestController {
     public String callByRibbon(){
        return restTemplate.getForObject("http://user-center/user/hello",String.class);
     }
+
+    @Autowired
+    private TestUserCenterFeignClient testUserCenterFeignClient;
+    @GetMapping(value = "/test-q")
+    public UserDTO query(UserDTO userDTO){
+        return testUserCenterFeignClient.query(userDTO);
+    }
+//
+//    @Autowired
+//    private TestBaiduFeignClient testBaiduFeignClient;
+//    @GetMapping(value = "/baidu")
+//    public String baiduIndex(){
+//        return this.testBaiduFeignClient.index();
+//    }
 
 }

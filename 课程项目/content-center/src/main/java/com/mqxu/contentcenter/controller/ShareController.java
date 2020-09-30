@@ -1,5 +1,6 @@
 package com.mqxu.contentcenter.controller;
 
+import com.mqxu.contentcenter.common.ResponseResult;
 import com.mqxu.contentcenter.domain.dto.ShareDTO;
 import com.mqxu.contentcenter.service.ShareService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,8 @@ public class ShareController {
     private final ShareService shareService;
 
     @GetMapping(value = "/{id}")
-    public ShareDTO findById(@PathVariable Integer id) {
-        return this.shareService.findById(id);
+    public ResponseResult findById(@PathVariable Integer id) {
+        return new ResponseResult(200,"请求成功",this.shareService.findById(id));
     }
 
     @GetMapping(value = "/hello")

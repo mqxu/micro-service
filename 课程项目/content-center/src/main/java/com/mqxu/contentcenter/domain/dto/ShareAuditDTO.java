@@ -3,6 +3,9 @@ package com.mqxu.contentcenter.domain.dto;
 import com.mqxu.contentcenter.domain.enums.AuditStatusEnum;
 import lombok.Data;
 
+/**
+ * @author mqxu
+ */
 @Data
 public class ShareAuditDTO {
     /**

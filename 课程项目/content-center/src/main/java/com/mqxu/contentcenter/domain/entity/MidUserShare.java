@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author mqxu
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

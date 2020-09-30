@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8081
 spring:
   application:
     name: user-center
@@ -9,7 +9,6 @@ spring:
         server-addr: localhost:8848
 #        namespace: 10e5a9a3-05ce-457f-b2a3-02bcfe1b512d
 
-  #        namespace: 1e123488-533d-45bb-9bdc-6870c27e58d8
   #        metadata:
 #          instance: cc
 #          hello: world
@@ -21,6 +20,12 @@ spring:
       username: root
       password: abc.123
       driver-class-name: com.mysql.cj.jdbc.Driver
+      minimumIdle: 10
+      maximumPoolSize: 10
+      maxLifetime: 1800000
+      idleTimeout: 600000
+      connectionTimeout: 30000
+
 
 
 management:
