@@ -1,0 +1,18 @@
+{
+    "code":200,
+    "msg":"success",
+    "data":[
+        {
+            "id":1001,
+            "name":"Java"
+        },
+        {
+            "id":1002,
+            "name":"JS"
+        },
+        {
+            "id":1003,
+            "name":"XML"
+        }
+    ]
+}

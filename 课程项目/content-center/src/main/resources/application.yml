@@ -1,5 +1,6 @@
 server:
   port: 8888
+
 spring:
   application:
     name: content-center
@@ -8,22 +9,22 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: 119.45.221.206:8848
 #        namespace: 10e5a9a3-05ce-457f-b2a3-02bcfe1b512d
 
   datasource:
-    url: jdbc:mysql://39.98.143.134:3306/content_center
+    url: jdbc:mysql://39.98.143.134:3306/content_center?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
     hikari:
       username: root
       password: abc.123
       driver-class-name: com.mysql.cj.jdbc.Driver
-      minimumIdle: 10
-      maximumPoolSize: 10
-      maxLifetime: 1800000
-      idleTimeout: 600000
-      connectionTimeout: 30000
 
+# Mybatis驼峰式开启，可省略
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
 
+# Spring Boot监控
 management:
   endpoints:
     web:
@@ -34,20 +35,15 @@ management:
       show-details: always
 
 # 细粒度的配置方式，不支持全局配置文件式写法，Ribbon全局配置只能用Java代码配置
-#user-center:
-#  ribbon:
-#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+user-center:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 
 #ribbon饥饿加载，提升首次访问速度
-#ribbon:
-#  eager-load:
-#    enabled: true
-#    clients: user-center
-
-# SpringBoot配置日志的方式
-#logging:
-#  level:
-#    com.mqxu: debug
+ribbon:
+  eager-load:
+    enabled: true
+    clients: user-center
 
 # feign配置日志
 logging:
@@ -56,12 +52,12 @@ logging:
     com.mqxu.contentcenter.feignclient.UserCenterFeignClient: debug
 
 # feign细粒度配置
-#feign:
-#  client:
-#    config:
-#     #想要调用的微服务名称
-#      user-center:
-#        loggerLevel: full
+feign:
+  client:
+    config:
+     #想要调用的微服务名称
+      user-center:
+        loggerLevel: full
 
 #feign:
 #  client:

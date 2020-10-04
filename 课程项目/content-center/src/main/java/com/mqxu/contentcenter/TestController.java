@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * 测试相关功能的接口
  */
 @Slf4j
-@RestController
+//@RestController
 @RequestMapping(value = "/test")
 public class TestController {
 

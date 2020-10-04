@@ -2,6 +2,7 @@ package com.mqxu.contentcenter;
 
 import com.mqxu.contentcenter.configuration.GlobalFeignConfiguration;
 import com.mqxu.contentcenter.configuration.UserCenterFeignConfiguration;
+import com.purgeteam.dispose.starter.annotation.EnableGlobalDispose;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -15,7 +16,8 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @MapperScan("com.mqxu.contentcenter.dao")
 @SpringBootApplication
-@EnableFeignClients(defaultConfiguration = GlobalFeignConfiguration.class)
+@EnableFeignClients//defaultConfiguration = GlobalFeignConfiguration.class)
+@EnableGlobalDispose
 public class ContentCenterApplication {
 
     public static void main(String[] args) {
