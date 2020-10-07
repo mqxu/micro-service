@@ -4,21 +4,23 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mqxu.contentcenter.dao.MidUserShareMapper;
 import com.mqxu.contentcenter.dao.ShareMapper;
-import com.mqxu.contentcenter.domain.dto.ShareDTO;
-import com.mqxu.contentcenter.domain.dto.UserDTO;
+import com.mqxu.contentcenter.domain.dto.*;
 import com.mqxu.contentcenter.domain.entity.MidUserShare;
 import com.mqxu.contentcenter.domain.entity.Share;
+import com.mqxu.contentcenter.domain.enums.AuditStatusEnum;
 import com.mqxu.contentcenter.feignclient.UserCenterFeignClient;
 import com.mqxu.contentcenter.service.ShareService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.StringUtil;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +34,8 @@ public class ShareServiceImpl implements ShareService {
     private final ShareMapper shareMapper;
     private final MidUserShareMapper midUserShareMapper;
     private final UserCenterFeignClient userCenterFeignClient;
-
+    private final RocketMQTemplate rocketMQTemplate;
+//    private final Source source;
 
     @Override
     public ShareDTO findById(Integer id) {
@@ -40,13 +43,11 @@ public class ShareServiceImpl implements ShareService {
         Share share = this.shareMapper.selectByPrimaryKey(id);
         // 获得发布人id
         Integer userId = share.getUserId();
-
         // 解决之前的问题：
         // 1. 代码不可读
         // 2. 复杂的url难以维护：https://user-center/s?ie={ie}&f={f}&rsv_bp=1&rsv_idx=1&tn=baidu&wd=a&rsv_pq=c86459bd002cfbaa&rsv_t=edb19hb%2BvO%2BTySu8dtmbl%2F9dCK%2FIgdyUX%2BxuFYuE0G08aHH5FkeP3n3BXxw&rqlang=cn&rsv_enter=1&rsv_sug3=1&rsv_sug2=0&inputT=611&rsv_sug4=611
         // 3. 难以相应需求的变化，变化很没有幸福感
         // 4. 编程体验不统一
-
         //通过feign请求用户中心接口，获得发布人详情
         UserDTO userDTO = this.userCenterFeignClient.findUserById(userId);
         ShareDTO shareDTO = new ShareDTO();
@@ -99,6 +100,55 @@ public class ShareServiceImpl implements ShareService {
         }
         return new PageInfo<>(sharesDeal);
     }
+
+    @Override
+    public int contribute(ShareRequestDTO shareRequestDTO) {
+        Share share = Share.builder()
+                .isOriginal(shareRequestDTO.getIsOriginal())
+                .author(shareRequestDTO.getAuthor())
+                .price(shareRequestDTO.getPrice())
+                .downloadUrl(shareRequestDTO.getDownloadUrl())
+                .summary(shareRequestDTO.getSummary())
+                .buyCount(shareRequestDTO.getPrice())
+                .title(shareRequestDTO.getTitle())
+                .userId(1)
+                .cover("https://img4.mukewang.com/szimg/5d1032ab08719e0906000338-360-202.jpg")
+                .createTime(new Date())
+                .updateTime(new Date())
+                .showFlag(false)
+                .auditStatus("NOT_YET")
+                .reason("未审核")
+                .build();
+        return shareMapper.insert(share);
+    }
+
+    @Override
+    public Share auditById(Integer id, ShareAuditDTO shareAuditDTO) {
+        // 1. 查询share是否存在，不存在或者当前的audit_status != NOT_YET，那么抛异常
+        Share share = this.shareMapper.selectByPrimaryKey(id);
+        if (share == null) {
+            throw new IllegalArgumentException("参数非法！该分享不存在！");
+        }
+        if (!Objects.equals("NOT_YET", share.getAuditStatus())) {
+            throw new IllegalArgumentException("参数非法！该分享已审核通过或审核不通过！");
+        }
+        //2.审核资源，将状态改为PASS或REJECT
+        //这个API的主要流程是审核，所以不需要等更新积分的结果返回，可以将加积分改为异步
+        share.setAuditStatus(shareAuditDTO.getAuditStatusEnum().toString());
+        this.shareMapper.updateByPrimaryKey(share);
+
+        // 3. 如果是PASS，那么发送消息给rocketmq，让用户中心去消费，并为发布人添加积分
+        if (AuditStatusEnum.PASS.equals(shareAuditDTO.getAuditStatusEnum())){
+            this.rocketMQTemplate.convertAndSend(
+                    "add-bonus",
+                    UserAddBonusMsgDTO.builder()
+                    .userId(share.getUserId())
+                    .bonus(50)
+                    .build());
+        }
+        return share;
+    }
+
 
     @Override
     public String getHello() {

@@ -57,18 +57,6 @@ public class SwaggerConfiguration {
                 .apis(RequestHandlerSelectors.basePackage("com.mqxu.contentcenter"))
                 .build()
                 .apiInfo(apiInfo());
-//                .useDefaultResponseMessages(false)
-//                .globalResponseMessage(RequestMethod.GET, newArrayList(
-//                        new ResponseMessageBuilder()
-//                                .code(500)
-//                                .message("服务器发生异常")
-//                                .responseModel(new ModelRef("Error"))
-//                                .build(),
-//                        new ResponseMessageBuilder()
-//                                .code(403)
-//                                .message("资源不可用")
-//                                .build()
-//                ));
     }
 }
 

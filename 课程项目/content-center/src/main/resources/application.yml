@@ -10,7 +10,13 @@ spring:
     nacos:
       discovery:
         server-addr: 119.45.221.206:8848
-#        namespace: 10e5a9a3-05ce-457f-b2a3-02bcfe1b512d
+
+    sentinel:
+      transport:
+        #指定sentinel控制台地址
+#        dashboard: 119.45.221.206:8080
+        dashboard: localhost:8080
+
 
   datasource:
     url: jdbc:mysql://39.98.143.134:3306/content_center?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
@@ -65,3 +71,9 @@ feign:
 #     #全局配置
 #      default:
 #        loggerLevel: full
+
+rocketmq:
+  name-server: 119.45.221.206:9876
+  producer:
+    # 必须指定group
+    group: test-group

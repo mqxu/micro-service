@@ -1,8 +1,11 @@
 package com.mqxu.contentcenter;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.mqxu.contentcenter.domain.dto.UserDTO;
 import com.mqxu.contentcenter.feignclient.TestBaiduFeignClient;
 import com.mqxu.contentcenter.feignclient.TestUserCenterFeignClient;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -22,17 +25,12 @@ import java.util.stream.Collectors;
  * 测试相关功能的接口
  */
 @Slf4j
-//@RestController
-@RequestMapping(value = "/test")
+@RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TestController {
 
-    @Autowired
-    private DiscoveryClient discoveryClient;
-
-    @Autowired
-    private RestTemplate restTemplate;
-
-
+    private final  DiscoveryClient discoveryClient;
+    private final  RestTemplate restTemplate;
 
     /**
      * 测试服务发现，证明内容中心总能找到用户中心
@@ -75,18 +73,40 @@ public class TestController {
        return restTemplate.getForObject("http://user-center/user/hello",String.class);
     }
 
-    @Autowired
-    private TestUserCenterFeignClient testUserCenterFeignClient;
+    private final TestUserCenterFeignClient testUserCenterFeignClient;
     @GetMapping(value = "/test-q")
     public UserDTO query(UserDTO userDTO){
         return testUserCenterFeignClient.query(userDTO);
     }
-//
-//    @Autowired
-//    private TestBaiduFeignClient testBaiduFeignClient;
+
+//    private final  TestBaiduFeignClient testBaiduFeignClient;
 //    @GetMapping(value = "/baidu")
 //    public String baiduIndex(){
 //        return this.testBaiduFeignClient.index();
 //    }
 
+    private final TestService testService;
+
+    @GetMapping("/test-a")
+    public String testA() {
+        this.testService.commonMethod();
+        return "test-a";
+    }
+
+    @GetMapping("/test-b")
+    public String testB() {
+        this.testService.commonMethod();
+        return "test-b";
+    }
+
+    @GetMapping("byResource")
+    @SentinelResource(value = "hello",blockHandler = "handleException")
+    public String byResource(){
+        return "按名称限流";
+    }
+
+    public  String handleException(BlockException blockException){
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("http://localhost:64615/users/1", String.class);
+    }
 }

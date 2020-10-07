@@ -52,8 +52,8 @@ public class DateFormatConfig {
         return new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(pattern));
     }
 
-//    @Bean
-//    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-//        return builder -> builder.serializerByType(LocalDateTime.class, localDateTimeDeserializer());
-//    }
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+        return builder -> builder.serializerByType(LocalDateTime.class, localDateTimeDeserializer());
+    }
 }

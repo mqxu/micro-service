@@ -7,7 +7,6 @@ import lombok.Getter;
  * @author mqxu
  * 审核状态枚举
  */
-
 @Getter
 @AllArgsConstructor
 public enum AuditStatusEnum {
@@ -18,7 +17,7 @@ public enum AuditStatusEnum {
     /**
      * 审核通过
      */
-    PASSED,
+    PASS,
     /**
      * 审核不通过
      */

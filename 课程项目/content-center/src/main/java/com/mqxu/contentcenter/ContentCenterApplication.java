@@ -16,8 +16,8 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @MapperScan("com.mqxu.contentcenter.dao")
 @SpringBootApplication
-@EnableFeignClients//defaultConfiguration = GlobalFeignConfiguration.class)
-@EnableGlobalDispose
+@EnableFeignClients(defaultConfiguration = GlobalFeignConfiguration.class)
+//@EnableGlobalDispose
 public class ContentCenterApplication {
 
     public static void main(String[] args) {

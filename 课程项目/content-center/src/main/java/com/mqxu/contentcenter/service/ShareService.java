@@ -1,7 +1,9 @@
 package com.mqxu.contentcenter.service;
 
 import com.github.pagehelper.PageInfo;
+import com.mqxu.contentcenter.domain.dto.ShareAuditDTO;
 import com.mqxu.contentcenter.domain.dto.ShareDTO;
+import com.mqxu.contentcenter.domain.dto.ShareRequestDTO;
 import com.mqxu.contentcenter.domain.entity.Share;
 
 
@@ -25,6 +27,22 @@ public interface ShareService {
      * @return  PageInfo<Share>
      */
     PageInfo<Share> query(String title, Integer pageNo, Integer pageSize, Integer userId);
+
+
+    /**
+     * 投稿
+     * @param shareRequestDTO
+     * @return Share
+     */
+   int contribute(ShareRequestDTO shareRequestDTO);
+
+    /**
+     * 审核投稿
+     * @param id
+     * @param shareAuditDTO
+     * @return Share
+     */
+   Share auditById(Integer id, ShareAuditDTO shareAuditDTO);
 
     String getHello();
 }

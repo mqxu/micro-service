@@ -25,7 +25,7 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public Notice getLatest() {
         Example example = new Example(Notice.class);
-        //按id降序排练
+        //按id降序
         example.setOrderByClause("id DESC");
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("showFlag",1);

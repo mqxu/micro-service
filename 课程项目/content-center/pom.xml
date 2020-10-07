@@ -17,9 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
     <dependencies>
-
         <!--unified-dispose-springboot-starter 里面包含了一些基础的异常处理以及返回包装功能。-->
         <dependency>
             <groupId>com.purgeteam</groupId>
@@ -32,13 +30,6 @@
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>2.1.5</version>
         </dependency>
-
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper</artifactId>
-            <version>4.1.5</version>
-        </dependency>
-
 
         <!-- MyBatis分页插件-->
         <dependency>
@@ -96,6 +87,23 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
+        <dependency>
+            　　<groupId>org.hibernate</groupId>
+            　　<artifactId>hibernate-validator</artifactId>
+            　　<version>5.2.4.Final</version>
         </dependency>
 
         <!-- swagger -->
@@ -162,7 +170,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-<!--            swagger2markup-maven-plugin 插件的作用是读取 http://localhost:8080/v2/api-docs 的信息，生成ASCIIDOC文档。当然你也可以生成其他格式，比如Markdown等等。-->
+<!--            swagger2markup-maven-plugin 插件的作用是读取 http://localhost:8888/v2/api-docs 的信息，生成ASCIIDOC文档。当然你也可以生成其他格式，比如Markdown等等。-->
 <!--            这款插件还有很多使用姿势，详见 https://github.com/Swagger2Markup/swagger2markup-maven-plugin-->
             <plugin>
                 <groupId>io.github.swagger2markup</groupId>
