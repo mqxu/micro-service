@@ -1,0 +1,38 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 119.45.221.206:8848
+    gateway:
+      discovery:
+        locator:
+          # 让gateway通过服务发现组件找到其他的微服务
+          enabled: true
+      routes:
+        - id: after_route
+          uri: lb://user-center
+          predicates:
+            - TimeBetween=上午0:00,下午11:59
+        - id: after_route
+          uri: lb://content-center
+          predicates:
+            - TimeBetween=上午0:00,下午11:59
+#          filters:
+#            - AddRequestHeader=X-Request-Foo, Bar
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
