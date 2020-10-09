@@ -24,7 +24,7 @@ spring:
       maximumPoolSize: 100
       maxLifetime: 1800000
       idleTimeout: 600000
-      connectionTimeout: 30000
+      CONNECTIONTIMEOUT: 30000
 
 
 
@@ -38,4 +38,5 @@ management:
       show-details: always
 
 rocketmq:
-  name-server: 119.45.221.206:9876
+#  name-server: 119.45.221.206:9876
+  name-server: 39.98.143.134:9876

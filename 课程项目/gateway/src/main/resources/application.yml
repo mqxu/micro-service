@@ -1,5 +1,5 @@
 server:
-  port: 8040
+  port: 8070
 spring:
   application:
     name: gateway
@@ -10,19 +10,27 @@ spring:
     gateway:
       discovery:
         locator:
-          # 让gateway通过服务发现组件找到其他的微服务
           enabled: true
       routes:
-        - id: after_route
+#        - id: path_route1
+#          uri: http://localhost:53955/users/{id}
+#          predicates:
+#            - Path=/users/{id}
+#            - After=2020-10-09T10:00:00.000+80:00[Asia/Shanghai]
+#        - id: path_route2
+#          uri: http://localhost:8888/shares/{id}
+#          predicates:
+#            - Path=/shares/{id}
+        - id: between_route
           uri: lb://user-center
           predicates:
-            - TimeBetween=上午0:00,下午11:59
-        - id: after_route
-          uri: lb://content-center
-          predicates:
-            - TimeBetween=上午0:00,下午11:59
-#          filters:
-#            - AddRequestHeader=X-Request-Foo, Bar
+#            - Path=/**
+            - TimeBetween=上午11:20,下午5:00
+              # 当且仅当带有名为X-Request-Id，并且值符合正则\d+的Header时，才会转发到用户微服务
+              # 如Header满足条件，则访问http://localhost:8040/** -> user-center/**
+              # eg. 访问http://localhost:8040/users/1 -> user-center/users/1
+#              - Header=X-Request-Id, \d+
+
 
 management:
   endpoints:

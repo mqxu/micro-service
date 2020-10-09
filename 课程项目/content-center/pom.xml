@@ -100,13 +100,6 @@
             <version>2.1.1</version>
         </dependency>
 
-        <dependency>
-            　　<groupId>org.hibernate</groupId>
-            　　<artifactId>hibernate-validator</artifactId>
-            　　<version>5.2.4.Final</version>
-        </dependency>
-
-        <!-- swagger -->
         <!-- 之所以要排除，是因为如果不排除会报NumberFormatException的警告。 -->
         <!-- 参考：https://github.com/springfox/springfox/issues/2265-->
         <dependency>

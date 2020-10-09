@@ -135,6 +135,7 @@ public class ShareServiceImpl implements ShareService {
         //2.审核资源，将状态改为PASS或REJECT
         //这个API的主要流程是审核，所以不需要等更新积分的结果返回，可以将加积分改为异步
         share.setAuditStatus(shareAuditDTO.getAuditStatusEnum().toString());
+        share.setReason(shareAuditDTO.getReason());
         this.shareMapper.updateByPrimaryKey(share);
 
         // 3. 如果是PASS，那么发送消息给rocketmq，让用户中心去消费，并为发布人添加积分
