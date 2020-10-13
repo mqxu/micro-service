@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "投稿",
+  "usingComponents": {
+    "uni-card": "/components/uni-card/uni-card"
+  }
+}

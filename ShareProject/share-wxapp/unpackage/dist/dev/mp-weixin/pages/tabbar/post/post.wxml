@@ -1,0 +1,1 @@
+<view class="container"><uni-card vue-id="282a53a2-1" title="微服务技术" mode="title" is-shadow="{{true}}" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg" extra="技术没有上限" note="软件_1851" bind:__l="__l" vue-slots="{{['default']}}">微服务技术微服务技术</uni-card></view>

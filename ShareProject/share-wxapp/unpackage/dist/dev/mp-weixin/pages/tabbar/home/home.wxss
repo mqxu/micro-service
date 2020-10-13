@@ -1,0 +1,14 @@
+
+.container {
+	padding: 10px;
+	line-height: 24px;
+}
+.item {
+	font-size: 20px;
+}
+.notice {
+	margin-top: 10px;
+	font-size: 16px;
+	color: #ec544d;
+}
+

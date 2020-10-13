@@ -1,0 +1,43 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: user-center
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 39.98.143.134:8848
+#        namespace: 10e5a9a3-05ce-457f-b2a3-02bcfe1b512d
+#        metadata:
+#          instance: cc
+#          hello: world
+#          version: 1.0
+
+  datasource:
+    url: jdbc:mysql://39.98.143.134:3306/user_center?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    hikari:
+      username: root
+      password: NjuitScs.123
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      minimum-idle: 10
+      maximum-pool-size: 20
+      idle-timeout: 500000
+      max-lifetime: 540000
+      connection-timeout: 60000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+rocketmq:
+  name-server: 119.45.221.206:9876
+
+jwt:
+  secret: aaaaaaabbbbbbcccccdddddaaaaaaabbbbbbcccccdddddaaaaaaabbbbbbcccccddddd
+  # 有效期，单位秒，默认2周
+  expire-time-in-second: 1209600
