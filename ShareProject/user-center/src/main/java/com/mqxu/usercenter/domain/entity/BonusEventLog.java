@@ -41,11 +41,13 @@ public class BonusEventLog {
     /**
      * 积分操作值
      */
+    @Column(name = "value")
     private Integer value;
 
     /**
      * 发生的事件
      */
+    @Column(name = "event")
     private String event;
 
     /**
@@ -57,5 +59,6 @@ public class BonusEventLog {
     /**
      * 描述
      */
+    @Column(name = "description")
     private String description;
 }

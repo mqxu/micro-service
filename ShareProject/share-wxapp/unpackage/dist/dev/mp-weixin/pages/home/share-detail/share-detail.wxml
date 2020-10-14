@@ -1,0 +1,1 @@
+<view class="container"><view class="title _h4">{{share.title}}</view><image src="{{share.cover}}"></image><view class="_p">{{share.summary}}</view><view class="_p">{{share.downloadUrl}}</view><button data-event-opts="{{[['tap',[['paste',['$event']]]]]}}" bindtap="__e">复制下载地址</button></view>

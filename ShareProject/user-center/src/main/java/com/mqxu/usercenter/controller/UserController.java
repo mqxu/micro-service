@@ -10,6 +10,7 @@ import com.mqxu.usercenter.util.JwtOperator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class UserController {
     @GetMapping(value = "/{id}")
     @CheckLogin
     public User findUserById(@PathVariable Integer id) {
-        log.info("我被请求了...");
+        log.info("根据id查找用户被请求了...");
         return this.userService.findById(id);
     }
 
@@ -50,9 +51,10 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public LoginRespDTO login(@RequestBody LoginDTO loginDTO) throws WxErrorException {
+        System.out.println(loginDTO + ">>>>>>>>>>>>>>>>>>>");
         String openId;
         //微信小程序登录，需要根据code请求openId
-        if (loginDTO.getLoginCode() != null) {
+        if (loginDTO.getOpenId() == null) {
             // 微信服务端校验是否已经登录的结果
             WxMaJscode2SessionResult result = this.wxMaService.getUserService()
                     .getSessionInfo(loginDTO.getLoginCode());
@@ -93,9 +95,9 @@ public class UserController {
                 .build();
     }
 
-    @PutMapping("/add-bonus")
-    //@ApiOperation(value = "分享列表", notes = "分享列表")
+    @PutMapping(value = "/add-bonus")
     public User addBonus(@RequestBody UserAddBonusDTO userAddBonusDTO) {
+        log.info("增减积分接口被请求了...");
         Integer userId = userAddBonusDTO.getUserId();
         userService.addBonus(
                 UserAddBonusMsgDTO.builder()

@@ -20,6 +20,7 @@ public class TokenInterceptor implements RequestInterceptor {
         // 1. 获取到token
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes attributes = (ServletRequestAttributes) requestAttributes;
+        assert attributes != null;
         HttpServletRequest request = attributes.getRequest();
         String token = request.getHeader("X-Token");
 

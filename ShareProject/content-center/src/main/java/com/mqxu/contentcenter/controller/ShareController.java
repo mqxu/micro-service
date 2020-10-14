@@ -1,6 +1,7 @@
 package com.mqxu.contentcenter.controller;
 
 import com.mqxu.contentcenter.auth.CheckLogin;
+import com.mqxu.contentcenter.domain.dto.ExchangeDTO;
 import com.mqxu.contentcenter.domain.dto.ShareDTO;
 import com.mqxu.contentcenter.domain.dto.ShareRequestDTO;
 import com.mqxu.contentcenter.domain.entity.Share;
@@ -10,13 +11,12 @@ import io.jsonwebtoken.Claims;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.sound.midi.Soundbank;
 import java.util.List;
 
 
@@ -28,6 +28,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/shares")
 @Api(tags = "分享接口", value = "提供分享相关的Rest API")
+@Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ShareController {
     private final ShareService shareService;
@@ -36,13 +37,13 @@ public class ShareController {
     @GetMapping(value = "/{id}")
     @CheckLogin
     @ApiOperation(value = "查询指定id的分享详情", notes = "查询指定id的分享详情")
-    public ShareDTO findById(@PathVariable Integer id){
+    public ShareDTO findById(@PathVariable Integer id) {
         return this.shareService.findById(id);
     }
 
     @GetMapping("/query")
     @ApiOperation(value = "分享列表", notes = "分享列表")
-    public List<Share> query (
+    public List<Share> query(
             @RequestParam(required = false) String title,
             @RequestParam(required = false, defaultValue = "1") Integer pageNo,
             @RequestParam(required = false, defaultValue = "10") Integer pageSize,
@@ -51,12 +52,14 @@ public class ShareController {
             pageSize = 100;
         }
         Integer userId = null;
+
         if (StringUtils.isNotBlank(token)) {
             System.out.println(token);
             Claims claims = this.jwtOperator.getClaimsFromToken(token);
+            log.info(claims.toString());
             userId = (Integer) claims.get("id");
-        }else {
-            System.out.println("没有token");
+        } else {
+            log.info("没有token");
         }
         return this.shareService.query(title, pageNo, pageSize, userId).getList();
     }
@@ -65,14 +68,16 @@ public class ShareController {
     @PostMapping("/contribute")
     @CheckLogin
     @ApiOperation(value = "投稿", notes = "投稿")
-    public int contributeShare(@RequestBody ShareRequestDTO shareRequestDTO){
+    public int contributeShare(@RequestBody ShareRequestDTO shareRequestDTO) {
+        System.out.println(shareRequestDTO);
         return shareService.contribute(shareRequestDTO);
     }
 
-    @GetMapping("/exchange/{id}")
+    @PostMapping("/exchange")
     @CheckLogin
-    public Share exchangeById(@PathVariable Integer id, HttpServletRequest request) {
-        return this.shareService.exchangeById(id, request);
+    public Share exchange(@RequestBody ExchangeDTO exchangeDTO) {
+        System.out.println(exchangeDTO + ">>>>>>>>>>>>");
+        return this.shareService.exchange(exchangeDTO);
     }
 
 }

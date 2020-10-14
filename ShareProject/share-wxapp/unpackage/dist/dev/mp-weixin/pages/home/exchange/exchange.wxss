@@ -1,0 +1,43 @@
+
+.container {
+	padding: 10px;
+	font-size: 15px;
+	background-color: #ffffff;
+}
+._h4 {
+	font-size: 16px;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+.exchange {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: end;
+	-webkit-justify-content: end;
+	        justify-content: end;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+._p {
+	margin: 10px;
+}
+._p ._span {
+	margin-right: 15px;
+}
+.btn {
+	background-color: #ec544d;
+	max-height: 35px;
+	min-width: 85px;
+	color: #ffffff;
+	margin-left: 10px;
+	font-size: 14px;
+}
+.price {
+	color: #ec544d;
+}
+

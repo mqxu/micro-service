@@ -1,6 +1,7 @@
 package com.mqxu.contentcenter.service;
 
 import com.github.pagehelper.PageInfo;
+import com.mqxu.contentcenter.domain.dto.ExchangeDTO;
 import com.mqxu.contentcenter.domain.dto.ShareAuditDTO;
 import com.mqxu.contentcenter.domain.dto.ShareDTO;
 import com.mqxu.contentcenter.domain.dto.ShareRequestDTO;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface ShareService {
     /**
      * 分享详情
+     *
      * @param id
      * @return ShareDTO
      */
@@ -22,35 +24,38 @@ public interface ShareService {
 
     /**
      * 根据标题模糊查询某个用户的分享列表数据，title为空则为所有数据，查询结果分页
+     *
      * @param title
      * @param pageNo
      * @param pageSize
      * @param userId
-     * @return  PageInfo<Share>
+     * @return PageInfo<Share>
      */
     PageInfo<Share> query(String title, Integer pageNo, Integer pageSize, Integer userId);
 
 
     /**
      * 投稿
+     *
      * @param shareRequestDTO
      * @return Share
      */
-   int contribute(ShareRequestDTO shareRequestDTO);
+    int contribute(ShareRequestDTO shareRequestDTO);
 
     /**
      * 审核投稿
+     *
      * @param id
      * @param shareAuditDTO
      * @return Share
      */
-   Share auditById(Integer id, ShareAuditDTO shareAuditDTO);
+    Share auditById(Integer id, ShareAuditDTO shareAuditDTO);
 
     /**
      * 积分兑换资源
-     * @param id
-     * @param request
-     * @return
+     *
+     * @param exchangeDTO
+     * @return Share
      */
-    Share exchangeById(Integer id, HttpServletRequest request);
+    Share exchange(ExchangeDTO exchangeDTO);
 }

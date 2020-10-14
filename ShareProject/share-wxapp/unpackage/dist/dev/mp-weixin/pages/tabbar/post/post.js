@@ -92,7 +92,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniCard: function() {
-    return __webpack_require__.e(/*! import() | components/uni-card/uni-card */ "components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/components/uni-card/uni-card.vue */ 66))
+    return __webpack_require__.e(/*! import() | components/uni-card/uni-card */ "components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/components/uni-card/uni-card.vue */ 82))
   }
 }
 var render = function() {
@@ -132,29 +132,41 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {
-      title: "投稿" };
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-  } };exports.default = _default;
+
+
+
+
+
+
+
+
+var _request = __webpack_require__(/*! @/utils/request */ 20);
+var _api = __webpack_require__(/*! @/utils/api */ 21); //
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { title: '投稿' };}, methods: { contribute: function contribute() {uni.showToast({
+        title: '投稿' });
+
+      (0, _request.request)(_api.CONTRIBUTE_URL, 'POST', {
+        author: '陶然然',
+        downloadUrl: 'www.baidu.com',
+        isOriginal: 'true',
+        price: 29,
+        summary: '一个资源',
+        title: '一个资源' }).
+      then(function (res) {
+        console.log(res);
+      });
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

@@ -92,7 +92,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  uniList: function() {
+    return __webpack_require__.e(/*! import() | components/uni-list/uni-list */ "components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @/components/uni-list/uni-list.vue */ 68))
+  },
+  uniListItem: function() {
+    return __webpack_require__.e(/*! import() | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @/components/uni-list-item/uni-list-item.vue */ 75))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -147,6 +154,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _request = __webpack_require__(/*! @/utils/request */ 20);
 var _api = __webpack_require__(/*! @/utils/api */ 21); //
 //
@@ -164,29 +185,26 @@ var _api = __webpack_require__(/*! @/utils/api */ 21); //
 //
 //
 //
-var _default = { data: function data() {return { user: null };}, onLoad: function onLoad() {if (uni.getStorageSync('user')) {this.user = uni.getStorageSync('user');}}, methods: { bindGetUserInfo: function bindGetUserInfo(e) {var platform = uni.getSystemInfoSync().platform; //微信开发者工具调试适用
-      if (platform === 'devtools') {//此处e.mp事件适用于mini program小程序
-        if (e.mp.detail.rawData) {
-          //用户按了允许授权按钮
-          this.wxLogin(e);
-        } else {
-          //用户按了拒绝按钮
-          uni.showToast({
-            title: '授权失败' });
-
-        }
-      }
-    },
-    wxLogin: function wxLogin(e) {
-      var self = this;
-      var userInfo = e.mp.detail.userInfo;
-      // console.log(userInfo);
-      wx.login({
-        success: function success(res) {
-          // console.log(res);
-          if (res.errMsg === 'login:ok') {
-            var loginDTO = {
-              loginCode: res.code,
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { user: null };}, onLoad: function onLoad() {if (uni.getStorageSync('user')) {this.user = uni.getStorageSync('user');}}, methods: { bindGetUserInfo: function bindGetUserInfo(e) {var platform = uni.getSystemInfoSync().platform; //此处e.mp事件适用于mini program小程序
+      if (e.mp.detail.rawData) {//用户按了允许授权按钮
+        this.wxLogin(e);} else {//用户按了拒绝按钮
+        uni.showToast({ title: '授权失败' });}}, wxLogin: function wxLogin(e) {var self = this;var userInfo = e.mp.detail.userInfo; // console.log(userInfo);
+      wx.login({ success: function success(res) {// console.log(res);
+          if (res.errMsg === 'login:ok') {var loginDTO = { loginCode: res.code,
               wxNickname: userInfo.nickName,
               avatarUrl: userInfo.avatarUrl };
 
@@ -222,15 +240,19 @@ var _default = { data: function data() {return { user: null };}, onLoad: functio
     userLogin: function userLogin(loginDTO) {var _this = this;
       console.log(loginDTO);
       (0, _request.request)(_api.LOGIN_URL, 'POST', loginDTO).then(function (res) {
-        uni.showToast({
-          title: '登录成功',
-          duration: 1000 });
+        if (res.succ === 'success') {
+          uni.showToast({
+            title: '登录成功' });
 
-        console.log(JSON.stringify(res.data));
+        }
+        console.log(res);
         _this.user = res.data.user;
         uni.setStorageSync('user', res.data.user);
         uni.setStorageSync('token', res.data.token);
       });
+    },
+    sign: function sign() {
+      console.log(uni.getStorageSync('user'));
     },
     logout: function logout() {
       this.user = null;

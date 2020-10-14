@@ -14,7 +14,7 @@ spring:
     sentinel:
       transport:
         #指定sentinel控制台地址
-#        dashboard: 119.45.221.206:8080
+        #        dashboard: 119.45.221.206:8080
         dashboard: localhost:8080
 
 
@@ -22,7 +22,7 @@ spring:
     url: jdbc:mysql://39.98.143.134:3306/content_center?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
     hikari:
       username: root
-      password: NjuitScs.123
+      password: ******
       driver-class-name: com.mysql.cj.jdbc.Driver
       minimum-idle: 10
       maximum-pool-size: 20
@@ -79,6 +79,7 @@ feign:
       # 全局配置
       default:
         loggerLevel: full
+        # 配置feign的拦截器，让token可以在各个微服务之间传递
         requestInterceptors:
           - com.mqxu.contentcenter.feignclient.interceptor.TokenInterceptor
   httpclient:

@@ -7,8 +7,6 @@ export const SHARE_URL = BASE_API_URL + '/shares';
 
 // 分享列表
 export const SHARE_LIST_URL = SHARE_URL + '/query';
-// 分享详情
-export const SHARE_DETAIL_URL = SHARE_URL + '/{id}';
 //投稿
 export const CONTRIBUTE_URL = SHARE_URL + '/contribute';
 //审核

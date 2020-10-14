@@ -2,7 +2,6 @@ package com.mqxu.contentcenter.feignclient;
 
 //import com.mqxu.contentcenter.configuration.GlobalFeignConfiguration;
 
-import com.mqxu.contentcenter.configuration.GlobalFeignConfiguration;
 import com.mqxu.contentcenter.configuration.UserCenterFeignConfiguration;
 import com.mqxu.contentcenter.domain.dto.UserAddBonusDTO;
 import com.mqxu.contentcenter.domain.dto.UserDTO;

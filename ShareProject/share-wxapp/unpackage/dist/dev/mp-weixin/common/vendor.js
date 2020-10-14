@@ -8782,8 +8782,8 @@ internalMixin(Vue);
                                                                                                                          * 封装uniapp的request
                                                                                                                          */
 function request(url, method, data) {
-  // console.log('url', url, 'method', method, 'data', data);
-  console.log('token', uni.getStorageSync('token'));
+  var token = uni.getStorageSync('token');
+  console.log(token);
   return new Promise(function (resolve, reject) {
     uni.request({
       url: url,
@@ -8791,16 +8791,14 @@ function request(url, method, data) {
       data: data,
       header: {
         'Content-Type': 'application/json',
-        'X-Token': uni.getStorageSync('token') },
+        'X-Token': token != null ? token.token : null },
 
       success: function success(res) {
-        // console.log('请求结果', res);
         resolve(res.data);
       },
       fail: function fail(err) {
         uni.showToast({
-          title: '请求失败',
-          duration: 2000 });
+          title: '请求失败' });
 
         reject(err);
       } });
@@ -8809,22 +8807,20 @@ function request(url, method, data) {
 }
 
 function get(url) {
-  console.log('token', uni.getStorageSync('token'));
+  var token = uni.getStorageSync('token');
   return new Promise(function (resolve, reject) {
     uni.request({
       url: url,
       method: 'GET',
       header: {
-        'X-Token': uni.getStorageSync('token').token },
+        'X-Token': token != null ? token.token : null },
 
       success: function success(res) {
         resolve(res.data);
-        // console.log(res.data)
       },
       fail: function fail(err) {
         uni.showToast({
-          title: '请求失败',
-          duration: 2000 });
+          title: '请求失败' });
 
         reject(err);
       } });
@@ -8843,7 +8839,7 @@ function get(url) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.SIGN_URL = exports.USER_CONTRIBUTION_URL = exports.USER_BONUS_LOG_URL = exports.LOGIN_URL = exports.USER_URL = exports.NOTICE_URL = exports.EXCHANGE_URL = exports.AUDIT_URL = exports.CONTRIBUTE_URL = exports.SHARE_DETAIL_URL = exports.SHARE_LIST_URL = exports.SHARE_URL = exports.BASE_API_URL = void 0; // 后端接口基础路径
+Object.defineProperty(exports, "__esModule", { value: true });exports.SIGN_URL = exports.USER_CONTRIBUTION_URL = exports.USER_BONUS_LOG_URL = exports.LOGIN_URL = exports.USER_URL = exports.NOTICE_URL = exports.EXCHANGE_URL = exports.AUDIT_URL = exports.CONTRIBUTE_URL = exports.SHARE_LIST_URL = exports.SHARE_URL = exports.BASE_API_URL = void 0; // 后端接口基础路径
 var BASE_API_URL = 'http://share11.utools.club';
 // export const BASE_API_URL = 'http://39.98.143.134:8040';
 
@@ -8852,10 +8848,8 @@ exports.BASE_API_URL = BASE_API_URL;var SHARE_URL = BASE_API_URL + '/shares';
 
 // 分享列表
 exports.SHARE_URL = SHARE_URL;var SHARE_LIST_URL = SHARE_URL + '/query';
-// 分享详情
-exports.SHARE_LIST_URL = SHARE_LIST_URL;var SHARE_DETAIL_URL = SHARE_URL + '/{id}';
 //投稿
-exports.SHARE_DETAIL_URL = SHARE_DETAIL_URL;var CONTRIBUTE_URL = SHARE_URL + '/contribute';
+exports.SHARE_LIST_URL = SHARE_LIST_URL;var CONTRIBUTE_URL = SHARE_URL + '/contribute';
 //审核
 exports.CONTRIBUTE_URL = CONTRIBUTE_URL;var AUDIT_URL = SHARE_URL + '/audit';
 //兑换
@@ -8919,7 +8913,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 78:
+/***/ 94:
 /*!********************************************************************************************************!*\
   !*** /Users/mqxu/Desktop/X7/code/micro-service/ShareProject/share-wxapp/components/uni-icons/icons.js ***!
   \********************************************************************************************************/

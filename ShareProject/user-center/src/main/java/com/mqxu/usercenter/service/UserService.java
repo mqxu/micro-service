@@ -33,7 +33,7 @@ public class UserService {
     }
 
     public User login(LoginDTO loginDTO, String openId) {
-        //先根据wxId查找用户
+        //先根据openId查找用户
         Example example = new Example(User.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("wxId", openId);
@@ -56,10 +56,11 @@ public class UserService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void addBonus(UserAddBonusMsgDTO msgDTO) {
+    public void addBonus(UserAddBonusMsgDTO userAddBonusMsgDTO) {
+        System.out.println(userAddBonusMsgDTO);
         // 1. 为用户加积分
-        Integer userId = msgDTO.getUserId();
-        Integer bonus = msgDTO.getBonus();
+        Integer userId = userAddBonusMsgDTO.getUserId();
+        Integer bonus = userAddBonusMsgDTO.getBonus();
         User user = this.userMapper.selectByPrimaryKey(userId);
 
         user.setBonus(user.getBonus() + bonus);
@@ -70,9 +71,9 @@ public class UserService {
                 BonusEventLog.builder()
                         .userId(userId)
                         .value(bonus)
-                        .event(msgDTO.getEvent())
+                        .event(userAddBonusMsgDTO.getEvent())
                         .createTime(new Date())
-                        .description(msgDTO.getDescription())
+                        .description(userAddBonusMsgDTO.getDescription())
                         .build()
         );
         log.info("积分添加完毕...");

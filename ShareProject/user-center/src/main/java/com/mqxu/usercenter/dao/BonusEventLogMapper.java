@@ -5,9 +5,9 @@ import tk.mybatis.mapper.common.Mapper;
 
 /**
  * @ClassName BonusEventLogMapper
- * @Description TODO
+ * @Description 积分事件日志
  * @Author mqxu
- * @Date 2020/10/7
+ * @Date 2020/10/13
  **/
 public interface BonusEventLogMapper extends Mapper<BonusEventLog> {
 }

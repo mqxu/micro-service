@@ -14,10 +14,11 @@
 							thumb-size="lg"
 							:showBadge="item.price + '积分'"
 							:rightText="item.downloadUrl === null ? '兑换' : '下载'"
-							showArrow="false"
+							showArrow="true"
 							v-for="(item, index) in items"
 							:key="index"
 							class="item"
+							@click="gotoDetail(item.downloadUrl, item.id)"
 						/>
 					</uni-list>
 				</view>
@@ -77,21 +78,26 @@ export default {
 			let notice = await get(NOTICE_URL);
 			// console.log(notice.data);
 			this.notice = notice.data;
+		},
+		gotoDetail(downloadUrl, id) {
+			if (downloadUrl === null) {
+				uni.navigateTo({
+					url: '../../home/exchange/exchange?id=' + id
+				});
+			} else {
+				uni.navigateTo({
+					url: '../../home/share-detail/share-detail?id=' + id
+				});
+			}
 		}
 	}
 };
 </script>
 
 <style>
-.container {
-	padding: 10px;
-	line-height: 24px;
-}
-.item {
-	font-size: 20px;
-}
 .notice {
 	margin-top: 10px;
+	margin-left: 10px;
 	font-size: 16px;
 	color: #ec544d;
 }

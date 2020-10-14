@@ -150,12 +150,11 @@ public class ShareServiceImpl implements ShareService {
     }
 
     @Override
-    public Share exchangeById(Integer id, HttpServletRequest request) {
-        Object userId = request.getAttribute("id");
-        Integer integerUserId = (Integer) userId;
-
+    public Share exchange(ExchangeDTO exchangeDTO) {
+        int userId = exchangeDTO.getUserId();
+        int shareId = exchangeDTO.getShareId();
         // 1. 根据id查询share，校验是否存在
-        Share share = this.shareMapper.selectByPrimaryKey(id);
+        Share share = this.shareMapper.selectByPrimaryKey(shareId);
         if (share == null) {
             throw new IllegalArgumentException("该分享不存在！");
         }
@@ -164,8 +163,8 @@ public class ShareServiceImpl implements ShareService {
         // 2. 如果当前用户已经兑换过该分享，则直接返回
         MidUserShare midUserShare = this.midUserShareMapper.selectOne(
                 MidUserShare.builder()
-                        .shareId(id)
-                        .userId(integerUserId)
+                        .shareId(shareId)
+                        .userId(userId)
                         .build()
         );
         if (midUserShare != null) {
@@ -173,22 +172,25 @@ public class ShareServiceImpl implements ShareService {
         }
 
         // 3. 根据当前登录的用户id，查询积分是否够
-        UserDTO userDTO = this.userCenterFeignClient.findUserById(integerUserId);
-        if (price > userDTO.getBonus()) {
-            throw new IllegalArgumentException("用户积分不够用！");
-        }
+        //UserDTO userDTO = this.userCenterFeignClient.findUserById(userId);
+        //System.out.println("用户积分：" + userDTO.getBonus());
+        //if (price > userDTO.getBonus()) {
+        //    throw new IllegalArgumentException("用户积分不够！");
+        //}
 
-        // 4. 扣减积分 & 往mid_user_share里插入一条数据
-        this.userCenterFeignClient.addBonus(
-                UserAddBonusDTO.builder()
-                        .userId(integerUserId)
-                        .bonus(-price)
-                        .build()
-        );
+
+        // 4. 扣积分
+        //this.userCenterFeignClient.addBonus(
+        //        UserAddBonusDTO.builder()
+        //                .userId(userId)
+        //                .bonus(price * -1)
+        //                .build()
+        //);
+        //5. 向mid_user_share表里插入一条数据
         this.midUserShareMapper.insert(
                 MidUserShare.builder()
-                        .userId(integerUserId)
-                        .shareId(id)
+                        .userId(userId)
+                        .shareId(shareId)
                         .build()
         );
         return share;

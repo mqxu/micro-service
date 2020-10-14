@@ -2,7 +2,9 @@
   "pages": [
     "pages/tabbar/home/home",
     "pages/tabbar/post/post",
-    "pages/tabbar/profile/profile"
+    "pages/tabbar/profile/profile",
+    "pages/home/share-detail/share-detail",
+    "pages/home/exchange/exchange"
   ],
   "subPackages": [],
   "window": {
@@ -37,6 +39,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap55.json"
+  "usingComponents": {}
 }
