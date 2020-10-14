@@ -25,6 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .container {
+  padding-top: 40px;
   text-align: center;
 }
 .container .box {
@@ -44,8 +45,8 @@
           align-items: center;
 }
 .container .box .avatar {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   -webkit-border-radius: 50%;
           border-radius: 50%;
 }
@@ -54,12 +55,44 @@
   margin-top: 20px;
   margin-bottom: 30px;
 }
-.container .box .sign {
+.container .box button {
+  background-color: #ec544d;
+  color: #ffffff;
+}
+.container .center {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.container .center .avatar {
+  width: 120px;
+  height: 120px;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+}
+.container .center .line {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.container .center .sign {
   width: 100px;
-  height: 30px;
+  height: 35px;
   background-color: #4c9d44;
   color: #ffffff;
   margin: 20px;
-  font-size: 14px;
+  font-size: 15px;
+}
+.item {
+  text-align: left;
+  padding-left: 30px;
+  line-height: 50px;
+  border-bottom: 1px dashed #ddd;
 }
 

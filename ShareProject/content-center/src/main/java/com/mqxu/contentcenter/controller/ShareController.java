@@ -12,11 +12,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -52,9 +50,7 @@ public class ShareController {
             pageSize = 100;
         }
         Integer userId = null;
-
-        if (StringUtils.isNotBlank(token)) {
-            System.out.println(token);
+        if (!"no-token".equals(token)) {
             Claims claims = this.jwtOperator.getClaimsFromToken(token);
             log.info(claims.toString());
             userId = (Integer) claims.get("id");

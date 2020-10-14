@@ -1,5 +1,7 @@
 package com.mqxu.contentcenter.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mqxu.contentcenter.dao.MidUserShareMapper;
@@ -50,11 +52,15 @@ public class ShareServiceImpl implements ShareService {
         // 3. 难以相应需求的变化，变化很没有幸福感
         // 4. 编程体验不统一
         //通过feign请求用户中心接口，获得发布人详情
-        UserDTO userDTO = this.userCenterFeignClient.findUserById(userId);
+        ResponseDTO responseDTO = this.userCenterFeignClient.findUserById(userId);
+        UserDTO userDTO = convert(responseDTO);
+        System.out.println(userDTO);
+        System.out.println(userDTO);
         ShareDTO shareDTO = new ShareDTO();
         shareDTO.setShare(share);
         // 属性的装配
         //BeanUtils.copyProperties(share, shareDTO);
+        assert userDTO != null;
         shareDTO.setWxNickname(userDTO.getWxNickname());
         return shareDTO;
     }
@@ -172,20 +178,21 @@ public class ShareServiceImpl implements ShareService {
         }
 
         // 3. 根据当前登录的用户id，查询积分是否够
-        //UserDTO userDTO = this.userCenterFeignClient.findUserById(userId);
-        //System.out.println("用户积分：" + userDTO.getBonus());
-        //if (price > userDTO.getBonus()) {
-        //    throw new IllegalArgumentException("用户积分不够！");
-        //}
-
+        //这里一定要注意通过调用户中心接口得到的返回值，外面已经封装了一层了，要解析才能拿到真正的用户数据
+        ResponseDTO responseDTO = this.userCenterFeignClient.findUserById(userId);
+        UserDTO userDTO = convert(responseDTO);
+        System.out.println(userDTO);
+        if (price > userDTO.getBonus()) {
+            throw new IllegalArgumentException("用户积分不够！");
+        }
 
         // 4. 扣积分
-        //this.userCenterFeignClient.addBonus(
-        //        UserAddBonusDTO.builder()
-        //                .userId(userId)
-        //                .bonus(price * -1)
-        //                .build()
-        //);
+        this.userCenterFeignClient.addBonus(
+                UserAddBonusDTO.builder()
+                        .userId(userId)
+                        .bonus(price * -1)
+                        .build()
+        );
         //5. 向mid_user_share表里插入一条数据
         this.midUserShareMapper.insert(
                 MidUserShare.builder()
@@ -194,6 +201,23 @@ public class ShareServiceImpl implements ShareService {
                         .build()
         );
         return share;
+    }
+
+    /**
+     * 将统一的返回响应结果转换为UserDTO类型
+     * @param responseDTO
+     * @return
+     */
+    private UserDTO convert(ResponseDTO responseDTO) {
+        ObjectMapper mapper = new ObjectMapper();
+        UserDTO userDTO = null;
+        try {
+            String json = mapper.writeValueAsString(responseDTO.getData());
+            userDTO = mapper.readValue(json, UserDTO.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return userDTO;
     }
 
 }

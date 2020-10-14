@@ -2,7 +2,10 @@ package com.mqxu.contentcenter;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mqxu.contentcenter.domain.dto.UserDTO;
+import com.mqxu.contentcenter.domain.entity.Student;
 import com.mqxu.contentcenter.feignclient.TestBaiduFeignClient;
 import com.mqxu.contentcenter.feignclient.TestUserCenterFeignClient;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +32,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TestController {
 
-    private final  DiscoveryClient discoveryClient;
-    private final  RestTemplate restTemplate;
+    private final DiscoveryClient discoveryClient;
+    private final RestTemplate restTemplate;
 
     /**
      * 测试服务发现，证明内容中心总能找到用户中心
@@ -64,18 +67,19 @@ public class TestController {
 
         //随机数
         int i = ThreadLocalRandom.current().nextInt(targetUrls.size());
-        log.info("请求的目标地址：{}",targetUrls.get(i));
-        return restTemplate.getForObject(targetUrls.get(i),String.class);
+        log.info("请求的目标地址：{}", targetUrls.get(i));
+        return restTemplate.getForObject(targetUrls.get(i), String.class);
     }
 
     @GetMapping(value = "/call/ribbon")
-    public String callByRibbon(){
-       return restTemplate.getForObject("http://user-center/user/hello",String.class);
+    public String callByRibbon() {
+        return restTemplate.getForObject("http://user-center/user/hello", String.class);
     }
 
     private final TestUserCenterFeignClient testUserCenterFeignClient;
+
     @GetMapping(value = "/test-q")
-    public UserDTO query(UserDTO userDTO){
+    public UserDTO query(UserDTO userDTO) {
         return testUserCenterFeignClient.query(userDTO);
     }
 
@@ -100,13 +104,25 @@ public class TestController {
     }
 
     @GetMapping("byResource")
-    @SentinelResource(value = "hello",blockHandler = "handleException")
-    public String byResource(){
+    @SentinelResource(value = "hello", blockHandler = "handleException")
+    public String byResource() {
         return "按名称限流";
     }
 
-    public  String handleException(BlockException blockException){
+    public String handleException(BlockException blockException) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject("http://localhost:64615/users/1", String.class);
     }
+
+    public static void main(String[] args) throws JsonProcessingException {
+        //Jackson序列化和反序列化
+        ObjectMapper mapper = new ObjectMapper();
+        Student student = new Student("张三", 20);
+        String json = mapper.writeValueAsString(student);
+        System.out.println(json);
+        Student student1 = mapper.readValue(json, Student.class);
+        System.out.println(student1);
+    }
+
+
 }

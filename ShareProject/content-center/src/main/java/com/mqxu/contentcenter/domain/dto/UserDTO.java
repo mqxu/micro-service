@@ -1,6 +1,9 @@
 package com.mqxu.contentcenter.domain.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -8,6 +11,9 @@ import java.util.Date;
  * @author mqxu
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserDTO {
     /**
      * Id

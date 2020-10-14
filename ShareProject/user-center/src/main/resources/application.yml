@@ -17,7 +17,7 @@ spring:
     url: jdbc:mysql://39.98.143.134:3306/user_center?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
     hikari:
       username: root
-      password: ******
+      password: NjuitScs.123
       driver-class-name: com.mysql.cj.jdbc.Driver
       minimum-idle: 10
       maximum-pool-size: 20

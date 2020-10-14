@@ -150,12 +150,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _request = __webpack_require__(/*! @/utils/request */ 20);
 var _api = __webpack_require__(/*! @/utils/api */ 21);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 {
   data: function data() {
     return {
-      share: null };
+      share: null,
+      wxNickname: '' };
 
   },
   onLoad: function onLoad(option) {
@@ -166,7 +168,8 @@ var _api = __webpack_require__(/*! @/utils/api */ 21);function _interopRequireDe
     getShare: function getShare(id) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   (0, _request.get)(_api.SHARE_URL + '/' + id));case 2:res = _context.sent;
                 console.log(res.data);
-                _this.share = res.data.share;case 5:case "end":return _context.stop();}}}, _callee);}))();
+                _this.share = res.data.share;
+                _this.wxNickname = res.data.wxNickname;case 6:case "end":return _context.stop();}}}, _callee);}))();
     },
     exchange: function exchange() {
       // console.log('资源id：' + this.share.id);
@@ -175,11 +178,22 @@ var _api = __webpack_require__(/*! @/utils/api */ 21);function _interopRequireDe
         userId: uni.getStorageSync('user').id,
         shareId: this.share.id }).
       then(function (res) {
-        console.log(res);
-        if (res.succ === 'true') {
+        console.log(JSON.stringify(res) + '>>>>>>>>>>>>>');
+        if (res.succ === true) {
           uni.showToast({
-            title: '兑换成功' });
+            title: '兑换成功',
+            duration: 2000 });
 
+          //重新请求用户数据
+          (0, _request.get)(_api.USER_URL + '/' + uni.getStorageSync('user').id).then(function (res) {
+            //移除原有用户缓存数据，存入新的数据
+            uni.removeStorageSync('user');
+            uni.setStorageSync('user', res.data);
+            //跳回首页
+            uni.switchTab({
+              url: '/pages/tabbar/home/home' });
+
+          });
         }
       });
     } } };exports.default = _default;
