@@ -92,11 +92,11 @@
 
 可以审核投稿，选择通过或不通过（说明理由），发布或暂不发布
 
-<img src="https://pic-go-test.oss-cn-hangzhou.aliyuncs.com/md/20201018164204.png" alt="image-20201018164138620" style="zoom:50%;margin-left:0;" />
+
+
+<img src="https://pic-go-test.oss-cn-hangzhou.aliyuncs.com/md/20201018164204.png" alt="image-20201018164138620" style="zoom:44%;margin-left:0;" />
 
 <img src="https://pic-go-test.oss-cn-hangzhou.aliyuncs.com/md/20201018164552.PNG" alt="IMG_7187" style="zoom: 44%;margin-left:0; " />
-
-
 
 <img src="https://pic-go-test.oss-cn-hangzhou.aliyuncs.com/md/20201018164347.PNG" alt="IMG_7188" style="zoom: 44%; margin-left:0;" />
 
