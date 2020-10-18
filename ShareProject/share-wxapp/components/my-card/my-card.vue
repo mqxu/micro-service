@@ -8,7 +8,7 @@
 		<view class="detail">
 			<view class="mid">
 				<view class="title">{{ share.title }}</view>
-				<view class="summary">{{ summary }}</view>
+				<view class="summary">{{ share.summary.length > 30 ? share.summary.substring(0, 30) : share.summary }}</view>
 			</view>
 			<view class="right">
 				<view>{{ share.price }}积分</view>
@@ -22,15 +22,15 @@
 export default {
 	name: 'MyCard',
 	props: ['share'],
-	computed: {
-		summary() {
-			let summary = this.share.summary;
-			if (summary && summary.length > 30) {
-				summary = summary.substring(0, 30) + '...';
-			}
-			return summary;
-		}
-	},
+	// computed: {
+	// 	summary() {
+	// 		let summary = this.share.summary;
+	// 		if (summary && summary.length > 30) {
+	// 			summary = summary.substring(0, 30) + '...';
+	// 		}
+	// 		return summary;
+	// 	}
+	// },
 	methods: {
 		onClick() {
 			this.$emit('click');

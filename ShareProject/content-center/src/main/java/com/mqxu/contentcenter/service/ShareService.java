@@ -185,7 +185,7 @@ public class ShareService {
         if (AuditStatusEnum.PASS.equals(shareAuditDTO.getAuditStatusEnum())) {
             this.rocketMQTemplate.convertAndSend(
                     "add-bonus",
-                    UserAddBonusMsgDTO.builder()
+                    UserAddBonusDTO.builder()
                             .userId(share.getUserId())
                             .bonus(50)
                             .build());

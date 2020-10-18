@@ -56,27 +56,28 @@ export default {
 				userId: self.userId,
 				shareId: self.share.id
 			}).then(res => {
-				request(USER_URL + '/' + self.userId, 'GET', {}).then(res1 => {
-					console.log(res1);
-					//移除原有用户缓存数据，存入新的数据
-					uni.removeStorageSync('user');
-					uni.setStorageSync('user', res1.data);
-					uni.showModal({
-						title: '兑换成功',
-						content: '确定去查看，取消继续兑换',
-						success: function(res) {
-							if (res.confirm) {
-								uni.redirectTo({
-									url: `/pages/home/share-detail/share-detail?id=${self.id}`
-								});
-							} else if (res.cancel) {
-								uni.switchTab({
-									url: '../../tabbar/home/home'
-								});
-							}
+				uni.showModal({
+					title: '兑换成功',
+					content: '确定去查看，取消继续兑换',
+					success: function(res) {
+						if (res.confirm) {
+							uni.redirectTo({
+								url: `/pages/home/share-detail/share-detail?id=${self.id}`
+							});
+						} else if (res.cancel) {
+							uni.switchTab({
+								url: '../../tabbar/home/home'
+							});
 						}
-					});
+					}
 				});
+				// request(USER_URL + '/' + self.userId, 'GET', {}).then(res1 => {
+				// 	console.log(res1);
+				// 	//移除原有用户缓存数据，存入新的数据
+				// 	uni.removeStorageSync('user');
+				// 	uni.setStorageSync('user', res1.data);
+					
+				// });
 			});
 		}
 	}

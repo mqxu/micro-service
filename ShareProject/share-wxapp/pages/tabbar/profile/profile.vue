@@ -43,7 +43,7 @@ export default {
 	},
 	onShow() {
 		if (uni.getStorageSync('user')) {
-			this.user = uni.getStorageSync('user');
+			this.getUser();
 		}
 	},
 	// onShow() {
@@ -141,10 +141,11 @@ export default {
 		},
 		async getUser() {
 			let id = uni.getStorageSync('user').id;
-			let res = await request(USER_URL + `/${id}`, 'GET', {});
-			uni.setStorageSync('user', res.data.user);
-			this.user = res.data.user;
-			uni.stopPullDownRefresh();
+			await request(USER_URL + `/${id}`, 'GET', {}).then(res => {
+				console.log(JSON.stringify(res.data) + '>>>>>>>>>>>>>>>>>');
+				uni.setStorageSync('user', res.data);
+				this.user = res.data;
+			});
 		},
 		sign() {
 			// console.log(uni.getStorageSync('user'));

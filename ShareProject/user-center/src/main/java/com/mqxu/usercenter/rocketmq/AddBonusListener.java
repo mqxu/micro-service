@@ -2,7 +2,7 @@ package com.mqxu.usercenter.rocketmq;
 
 import com.mqxu.usercenter.dao.BonusEventLogMapper;
 import com.mqxu.usercenter.dao.UserMapper;
-import com.mqxu.usercenter.domain.dto.UserAddBonusMsgDTO;
+import com.mqxu.usercenter.domain.dto.UserAddBonusDTO;
 import com.mqxu.usercenter.domain.entity.BonusEventLog;
 import com.mqxu.usercenter.domain.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -22,21 +22,21 @@ import java.util.Date;
 @Service
 @RocketMQMessageListener(consumerGroup = "consumer", topic = "add-bonus")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class AddBonusListener implements RocketMQListener<UserAddBonusMsgDTO> {
+public class AddBonusListener implements RocketMQListener<UserAddBonusDTO> {
     private final UserMapper userMapper;
     private final BonusEventLogMapper bonusEventLogMapper;
 
     @Override
-    public void onMessage(UserAddBonusMsgDTO userAddBonusMsgDTO) {
+    public void onMessage(UserAddBonusDTO userAddBonusDTO) {
         //1.为用户加积分
-        Integer userId = userAddBonusMsgDTO.getUserId();
+        Integer userId = userAddBonusDTO.getUserId();
         User user = this.userMapper.selectByPrimaryKey(userId);
-        user.setBonus(user.getBonus() + userAddBonusMsgDTO.getBonus());
+        user.setBonus(user.getBonus() + userAddBonusDTO.getBonus());
         this.userMapper.updateByPrimaryKeySelective(user);
         // 2.写积分日志
         this.bonusEventLogMapper.insert(BonusEventLog.builder()
                 .userId(userId)
-                .value(userAddBonusMsgDTO.getBonus())
+                .value(userAddBonusDTO.getBonus())
                 .event("CONTRIBUTE")
                 .createTime(new Date())
                 .description("投稿加积分")

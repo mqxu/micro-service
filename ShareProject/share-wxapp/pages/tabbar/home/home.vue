@@ -5,7 +5,9 @@
 			<view v-if="current === 0">
 				<view class="notice">{{ notice.content }}</view>
 				<uni-search-bar></uni-search-bar>
-				<view v-for="(share, index) in shares" :key="index"><my-card :share="share" :key="index" @click="gotoDetail(share.downloadUrl, share.id)"></my-card></view>
+				<view v-for="(share, index) in shares" :key="index">
+					<my-card :share="share" :key="index" 
+					@click="gotoDetail(share.downloadUrl, share.id)"></my-card></view>
 			</view>
 			<view v-if="current === 1"><description></description></view>
 		</view>
