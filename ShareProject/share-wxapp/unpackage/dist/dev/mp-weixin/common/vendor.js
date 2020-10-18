@@ -1806,147 +1806,160 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 10:
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \**********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 134:
+/*!********************************************************************************************************!*\
+  !*** /Users/mqxu/Desktop/X7/code/micro-service/ShareProject/share-wxapp/components/uni-icons/icons.js ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode, /* vue-cli only */
-  components, // fixed by xxxxxx auto components
-  renderjs // fixed by xxxxxx renderjs
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // fixed by xxxxxx auto components
-  if (components) {
-    if (!options.components) {
-      options.components = {}
-    }
-    var hasOwn = Object.prototype.hasOwnProperty
-    for (var name in components) {
-      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
-        options.components[name] = components[name]
-      }
-    }
-  }
-  // fixed by xxxxxx renderjs
-  if (renderjs) {
-    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
-      this[renderjs.__module] = this
-    });
-    (options.mixins || (options.mixins = [])).push(renderjs)
-  }
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  "pulldown": "\uE588",
+  "refreshempty": "\uE461",
+  "back": "\uE471",
+  "forward": "\uE470",
+  "more": "\uE507",
+  "more-filled": "\uE537",
+  "scan": "\uE612",
+  "qq": "\uE264",
+  "weibo": "\uE260",
+  "weixin": "\uE261",
+  "pengyouquan": "\uE262",
+  "loop": "\uE565",
+  "refresh": "\uE407",
+  "refresh-filled": "\uE437",
+  "arrowthindown": "\uE585",
+  "arrowthinleft": "\uE586",
+  "arrowthinright": "\uE587",
+  "arrowthinup": "\uE584",
+  "undo-filled": "\uE7D6",
+  "undo": "\uE406",
+  "redo": "\uE405",
+  "redo-filled": "\uE7D9",
+  "bars": "\uE563",
+  "chatboxes": "\uE203",
+  "camera": "\uE301",
+  "chatboxes-filled": "\uE233",
+  "camera-filled": "\uE7EF",
+  "cart-filled": "\uE7F4",
+  "cart": "\uE7F5",
+  "checkbox-filled": "\uE442",
+  "checkbox": "\uE7FA",
+  "arrowleft": "\uE582",
+  "arrowdown": "\uE581",
+  "arrowright": "\uE583",
+  "smallcircle-filled": "\uE801",
+  "arrowup": "\uE580",
+  "circle": "\uE411",
+  "eye-filled": "\uE568",
+  "eye-slash-filled": "\uE822",
+  "eye-slash": "\uE823",
+  "eye": "\uE824",
+  "flag-filled": "\uE825",
+  "flag": "\uE508",
+  "gear-filled": "\uE532",
+  "reload": "\uE462",
+  "gear": "\uE502",
+  "hand-thumbsdown-filled": "\uE83B",
+  "hand-thumbsdown": "\uE83C",
+  "hand-thumbsup-filled": "\uE83D",
+  "heart-filled": "\uE83E",
+  "hand-thumbsup": "\uE83F",
+  "heart": "\uE840",
+  "home": "\uE500",
+  "info": "\uE504",
+  "home-filled": "\uE530",
+  "info-filled": "\uE534",
+  "circle-filled": "\uE441",
+  "chat-filled": "\uE847",
+  "chat": "\uE263",
+  "mail-open-filled": "\uE84D",
+  "email-filled": "\uE231",
+  "mail-open": "\uE84E",
+  "email": "\uE201",
+  "checkmarkempty": "\uE472",
+  "list": "\uE562",
+  "locked-filled": "\uE856",
+  "locked": "\uE506",
+  "map-filled": "\uE85C",
+  "map-pin": "\uE85E",
+  "map-pin-ellipse": "\uE864",
+  "map": "\uE364",
+  "minus-filled": "\uE440",
+  "mic-filled": "\uE332",
+  "minus": "\uE410",
+  "micoff": "\uE360",
+  "mic": "\uE302",
+  "clear": "\uE434",
+  "smallcircle": "\uE868",
+  "close": "\uE404",
+  "closeempty": "\uE460",
+  "paperclip": "\uE567",
+  "paperplane": "\uE503",
+  "paperplane-filled": "\uE86E",
+  "person-filled": "\uE131",
+  "contact-filled": "\uE130",
+  "person": "\uE101",
+  "contact": "\uE100",
+  "images-filled": "\uE87A",
+  "phone": "\uE200",
+  "images": "\uE87B",
+  "image": "\uE363",
+  "image-filled": "\uE877",
+  "location-filled": "\uE333",
+  "location": "\uE303",
+  "plus-filled": "\uE439",
+  "plus": "\uE409",
+  "plusempty": "\uE468",
+  "help-filled": "\uE535",
+  "help": "\uE505",
+  "navigate-filled": "\uE884",
+  "navigate": "\uE501",
+  "mic-slash-filled": "\uE892",
+  "search": "\uE466",
+  "settings": "\uE560",
+  "sound": "\uE590",
+  "sound-filled": "\uE8A1",
+  "spinner-cycle": "\uE465",
+  "download-filled": "\uE8A4",
+  "personadd-filled": "\uE132",
+  "videocam-filled": "\uE8AF",
+  "personadd": "\uE102",
+  "upload": "\uE402",
+  "upload-filled": "\uE8B1",
+  "starhalf": "\uE463",
+  "star-filled": "\uE438",
+  "star": "\uE408",
+  "trash": "\uE401",
+  "phone-filled": "\uE230",
+  "compose": "\uE400",
+  "videocam": "\uE300",
+  "trash-filled": "\uE8DC",
+  "download": "\uE403",
+  "chatbubble-filled": "\uE232",
+  "chatbubble": "\uE202",
+  "cloud-download": "\uE8E4",
+  "cloud-upload-filled": "\uE8E5",
+  "cloud-upload": "\uE8E6",
+  "cloud-download-filled": "\uE8E9",
+  "headphones": "\uE8BF",
+  "shop": "\uE609" };exports.default = _default;
 
 /***/ }),
 
-/***/ 17:
+/***/ 16:
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 18);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 17);
 
 /***/ }),
 
-/***/ 18:
+/***/ 17:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -1977,7 +1990,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 19);
+module.exports = __webpack_require__(/*! ./runtime */ 18);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -1994,7 +2007,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 19:
+/***/ 18:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -2723,6 +2736,60 @@ if (hadRuntime) {
   })() || Function("return this")()
 );
 
+
+/***/ }),
+
+/***/ 19:
+/*!***************************************************************************************!*\
+  !*** /Users/mqxu/Desktop/X7/code/micro-service/ShareProject/share-wxapp/utils/api.js ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.AUDIT_URL = exports.NOT_YET_SHARE_URL = exports.SIGN_URL = exports.MY_CONTRIBUTION_URL = exports.MY_BONUS_LOG_URL = exports.MY_EXCHANGE_URL = exports.LOGIN_URL = exports.EXCHANGE_URL = exports.CONTRIBUTE_URL = exports.LATEST_NOTICE_URL = exports.SHARE_LIST_URL = exports.ADMIN_URL = exports.NOTICE_URL = exports.USER_URL = exports.SHARE_URL = exports.BASE_API_URL = void 0; // 后端接口基础路径
+var BASE_API_URL = 'http://share11.utools.club';
+// export const BASE_API_URL = 'http://39.98.143.134:8040';
+
+// 相关接口基地址
+exports.BASE_API_URL = BASE_API_URL;var SHARE_URL = BASE_API_URL + '/shares';exports.SHARE_URL = SHARE_URL;
+var USER_URL = BASE_API_URL + '/users';exports.USER_URL = USER_URL;
+var NOTICE_URL = BASE_API_URL + '/notices';exports.NOTICE_URL = NOTICE_URL;
+var ADMIN_URL = BASE_API_URL + '/admin';
+
+
+
+//首页功能
+// 分享列表
+exports.ADMIN_URL = ADMIN_URL;var SHARE_LIST_URL = SHARE_URL + '/query';
+// 最新公告
+exports.SHARE_LIST_URL = SHARE_LIST_URL;var LATEST_NOTICE_URL = NOTICE_URL + '/latest';
+
+//投稿兑换相关功能
+//投稿
+exports.LATEST_NOTICE_URL = LATEST_NOTICE_URL;var CONTRIBUTE_URL = SHARE_URL + '/contribute';
+//兑换
+exports.CONTRIBUTE_URL = CONTRIBUTE_URL;var EXCHANGE_URL = SHARE_URL + '/exchange';
+
+
+
+//“我的”
+//登录
+exports.EXCHANGE_URL = EXCHANGE_URL;var LOGIN_URL = USER_URL + '/login';
+//我的兑换
+exports.LOGIN_URL = LOGIN_URL;var MY_EXCHANGE_URL = SHARE_URL + '/my-exchange';
+//积分明细
+exports.MY_EXCHANGE_URL = MY_EXCHANGE_URL;var MY_BONUS_LOG_URL = USER_URL + '/my-bonus-log';
+//我的投稿
+exports.MY_BONUS_LOG_URL = MY_BONUS_LOG_URL;var MY_CONTRIBUTION_URL = SHARE_URL + '/my-contribute';
+//签到
+exports.MY_CONTRIBUTION_URL = MY_CONTRIBUTION_URL;var SIGN_URL = USER_URL + '/sign';
+
+//管理员功能
+//管理员查看待审核分享列表
+exports.SIGN_URL = SIGN_URL;var NOT_YET_SHARE_URL = ADMIN_URL + '/shares/list';
+//管理员审核某个分享
+exports.NOT_YET_SHARE_URL = NOT_YET_SHARE_URL;var AUDIT_URL = ADMIN_URL + '/shares/audit';exports.AUDIT_URL = AUDIT_URL;
 
 /***/ }),
 
@@ -3477,11 +3544,13 @@ Dep.SharedObject.targetStack = [];
 function pushTarget (target) {
   Dep.SharedObject.targetStack.push(target);
   Dep.SharedObject.target = target;
+  Dep.target = target;
 }
 
 function popTarget () {
   Dep.SharedObject.targetStack.pop();
   Dep.SharedObject.target = Dep.SharedObject.targetStack[Dep.SharedObject.targetStack.length - 1];
+  Dep.target = Dep.SharedObject.target;
 }
 
 /*  */
@@ -8322,13 +8391,14 @@ function cloneWithData(vm) {
   }, ret);
 
   // vue-composition-api
-  var rawBindings = vm.__secret_vfa_state__ && vm.__secret_vfa_state__.rawBindings;
+  var compositionApiState = vm.__composition_api_state__ || vm.__secret_vfa_state__;
+  var rawBindings = compositionApiState && compositionApiState.rawBindings;
   if (rawBindings) {
     Object.keys(rawBindings).forEach(function (key) {
       ret[key] = vm[key];
     });
   }
-  
+
   //TODO 需要把无用数据处理掉，比如 list=>l0 则 list 需要移除，否则多传输一份数据
   Object.assign(ret, vm.$mp.data || {});
   if (
@@ -8770,122 +8840,6 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 20:
-/*!*******************************************************************************************!*\
-  !*** /Users/mqxu/Desktop/X7/code/micro-service/ShareProject/share-wxapp/utils/request.js ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.request = request;exports.get = get; /**
-                                                                                                                         * 封装uniapp的request
-                                                                                                                         */
-function request(url, method, data) {
-  var token = '';
-  // console.log(typeof(uni.getStorageSync('token').token))
-  if (typeof uni.getStorageSync('token').token == 'undefined') {
-    token = 'no-token';
-  } else {
-    token = uni.getStorageSync('token').token;
-  }
-  // console.log(token)
-  return new Promise(function (resolve, reject) {
-    uni.request({
-      url: url,
-      method: method,
-      data: data,
-      header: {
-        'Content-Type': 'application/json',
-        'X-Token': token },
-
-      success: function success(res) {
-        resolve(res.data);
-      },
-      fail: function fail(err) {
-        uni.showToast({
-          title: '请求失败' });
-
-        reject(err);
-      } });
-
-  });
-}
-
-function get(url) {
-  var token = '';
-  //如果本地存储没有token对象，那么取出其token属性的值的类型为undefined，可以看下控制台
-  // console.log(typeof(uni.getStorageSync('token').token))
-  //以下分本地有没有token，给后端传heaer，为了简便起见，没有token就用了个常量代替先
-  if (typeof uni.getStorageSync('token').token == 'undefined') {
-    token = 'no-token';
-  } else {
-    token = uni.getStorageSync('token').token;
-  }
-  // console.log(token)
-  return new Promise(function (resolve, reject) {
-    uni.request({
-      url: url,
-      method: 'GET',
-      header: {
-        'X-Token': token },
-
-      success: function success(res) {
-        resolve(res.data);
-      },
-      fail: function fail(err) {
-        uni.showToast({
-          title: '请求失败' });
-
-        reject(err);
-      } });
-
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 21:
-/*!***************************************************************************************!*\
-  !*** /Users/mqxu/Desktop/X7/code/micro-service/ShareProject/share-wxapp/utils/api.js ***!
-  \***************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.SIGN_URL = exports.USER_CONTRIBUTION_URL = exports.USER_BONUS_LOG_URL = exports.LOGIN_URL = exports.USER_URL = exports.NOTICE_URL = exports.EXCHANGE_URL = exports.AUDIT_URL = exports.CONTRIBUTE_URL = exports.SHARE_LIST_URL = exports.SHARE_URL = exports.BASE_API_URL = void 0; // 后端接口基础路径
-var BASE_API_URL = 'http://share11.utools.club';
-// export const BASE_API_URL = 'http://39.98.143.134:8040';
-
-// ShareController相关接口基地址
-exports.BASE_API_URL = BASE_API_URL;var SHARE_URL = BASE_API_URL + '/shares';
-
-// 分享列表
-exports.SHARE_URL = SHARE_URL;var SHARE_LIST_URL = SHARE_URL + '/query';
-//投稿
-exports.SHARE_LIST_URL = SHARE_LIST_URL;var CONTRIBUTE_URL = SHARE_URL + '/contribute';
-//审核
-exports.CONTRIBUTE_URL = CONTRIBUTE_URL;var AUDIT_URL = SHARE_URL + '/audit';
-//兑换
-exports.AUDIT_URL = AUDIT_URL;var EXCHANGE_URL = SHARE_URL + '/exchange';
-
-// 最新公告
-exports.EXCHANGE_URL = EXCHANGE_URL;var NOTICE_URL = BASE_API_URL + '/notices/latest';
-
-//UserController相关接口基地址
-exports.NOTICE_URL = NOTICE_URL;var USER_URL = BASE_API_URL + '/users';
-//登录
-exports.USER_URL = USER_URL;var LOGIN_URL = USER_URL + '/login';
-//积分明细
-exports.LOGIN_URL = LOGIN_URL;var USER_BONUS_LOG_URL = USER_URL + '/bonus-logs';
-//我的投稿
-exports.USER_BONUS_LOG_URL = USER_BONUS_LOG_URL;var USER_CONTRIBUTION_URL = USER_URL + '/contributions';
-//签到
-exports.USER_CONTRIBUTION_URL = USER_CONTRIBUTION_URL;var SIGN_URL = USER_URL + '/sign';exports.SIGN_URL = SIGN_URL;
-
-/***/ }),
-
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -8917,6 +8871,40 @@ module.exports = g;
 
 /***/ }),
 
+/***/ 36:
+/*!*****************************************************************************************!*\
+  !*** /Users/mqxu/Desktop/X7/code/micro-service/ShareProject/share-wxapp/utils/index.js ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.formatTime = formatTime;exports.default = void 0;function formatNumber(n) {
+  var str = n.toString();
+  return str[1] ? str : "0".concat(str);
+}
+
+function formatTime(date) {
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+
+  var t1 = [year, month, day].map(formatNumber).join('/');
+  var t2 = [hour, minute, second].map(formatNumber).join(':');
+
+  return "".concat(t1, " ").concat(t2);
+}var _default =
+
+{
+  formatNumber: formatNumber,
+  formatTime: formatTime };exports.default = _default;
+
+/***/ }),
+
 /***/ 4:
 /*!*************************************************************************************!*\
   !*** /Users/mqxu/Desktop/X7/code/micro-service/ShareProject/share-wxapp/pages.json ***!
@@ -8928,145 +8916,178 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 94:
-/*!********************************************************************************************************!*\
-  !*** /Users/mqxu/Desktop/X7/code/micro-service/ShareProject/share-wxapp/components/uni-icons/icons.js ***!
-  \********************************************************************************************************/
+/***/ 8:
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode, /* vue-cli only */
+  components, // fixed by xxxxxx auto components
+  renderjs // fixed by xxxxxx renderjs
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // fixed by xxxxxx auto components
+  if (components) {
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
+  }
+  // fixed by xxxxxx renderjs
+  if (renderjs) {
+    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
+      this[renderjs.__module] = this
+    });
+    (options.mixins || (options.mixins = [])).push(renderjs)
+  }
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ 9:
+/*!*******************************************************************************************!*\
+  !*** /Users/mqxu/Desktop/X7/code/micro-service/ShareProject/share-wxapp/utils/request.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  "pulldown": "\uE588",
-  "refreshempty": "\uE461",
-  "back": "\uE471",
-  "forward": "\uE470",
-  "more": "\uE507",
-  "more-filled": "\uE537",
-  "scan": "\uE612",
-  "qq": "\uE264",
-  "weibo": "\uE260",
-  "weixin": "\uE261",
-  "pengyouquan": "\uE262",
-  "loop": "\uE565",
-  "refresh": "\uE407",
-  "refresh-filled": "\uE437",
-  "arrowthindown": "\uE585",
-  "arrowthinleft": "\uE586",
-  "arrowthinright": "\uE587",
-  "arrowthinup": "\uE584",
-  "undo-filled": "\uE7D6",
-  "undo": "\uE406",
-  "redo": "\uE405",
-  "redo-filled": "\uE7D9",
-  "bars": "\uE563",
-  "chatboxes": "\uE203",
-  "camera": "\uE301",
-  "chatboxes-filled": "\uE233",
-  "camera-filled": "\uE7EF",
-  "cart-filled": "\uE7F4",
-  "cart": "\uE7F5",
-  "checkbox-filled": "\uE442",
-  "checkbox": "\uE7FA",
-  "arrowleft": "\uE582",
-  "arrowdown": "\uE581",
-  "arrowright": "\uE583",
-  "smallcircle-filled": "\uE801",
-  "arrowup": "\uE580",
-  "circle": "\uE411",
-  "eye-filled": "\uE568",
-  "eye-slash-filled": "\uE822",
-  "eye-slash": "\uE823",
-  "eye": "\uE824",
-  "flag-filled": "\uE825",
-  "flag": "\uE508",
-  "gear-filled": "\uE532",
-  "reload": "\uE462",
-  "gear": "\uE502",
-  "hand-thumbsdown-filled": "\uE83B",
-  "hand-thumbsdown": "\uE83C",
-  "hand-thumbsup-filled": "\uE83D",
-  "heart-filled": "\uE83E",
-  "hand-thumbsup": "\uE83F",
-  "heart": "\uE840",
-  "home": "\uE500",
-  "info": "\uE504",
-  "home-filled": "\uE530",
-  "info-filled": "\uE534",
-  "circle-filled": "\uE441",
-  "chat-filled": "\uE847",
-  "chat": "\uE263",
-  "mail-open-filled": "\uE84D",
-  "email-filled": "\uE231",
-  "mail-open": "\uE84E",
-  "email": "\uE201",
-  "checkmarkempty": "\uE472",
-  "list": "\uE562",
-  "locked-filled": "\uE856",
-  "locked": "\uE506",
-  "map-filled": "\uE85C",
-  "map-pin": "\uE85E",
-  "map-pin-ellipse": "\uE864",
-  "map": "\uE364",
-  "minus-filled": "\uE440",
-  "mic-filled": "\uE332",
-  "minus": "\uE410",
-  "micoff": "\uE360",
-  "mic": "\uE302",
-  "clear": "\uE434",
-  "smallcircle": "\uE868",
-  "close": "\uE404",
-  "closeempty": "\uE460",
-  "paperclip": "\uE567",
-  "paperplane": "\uE503",
-  "paperplane-filled": "\uE86E",
-  "person-filled": "\uE131",
-  "contact-filled": "\uE130",
-  "person": "\uE101",
-  "contact": "\uE100",
-  "images-filled": "\uE87A",
-  "phone": "\uE200",
-  "images": "\uE87B",
-  "image": "\uE363",
-  "image-filled": "\uE877",
-  "location-filled": "\uE333",
-  "location": "\uE303",
-  "plus-filled": "\uE439",
-  "plus": "\uE409",
-  "plusempty": "\uE468",
-  "help-filled": "\uE535",
-  "help": "\uE505",
-  "navigate-filled": "\uE884",
-  "navigate": "\uE501",
-  "mic-slash-filled": "\uE892",
-  "search": "\uE466",
-  "settings": "\uE560",
-  "sound": "\uE590",
-  "sound-filled": "\uE8A1",
-  "spinner-cycle": "\uE465",
-  "download-filled": "\uE8A4",
-  "personadd-filled": "\uE132",
-  "videocam-filled": "\uE8AF",
-  "personadd": "\uE102",
-  "upload": "\uE402",
-  "upload-filled": "\uE8B1",
-  "starhalf": "\uE463",
-  "star-filled": "\uE438",
-  "star": "\uE408",
-  "trash": "\uE401",
-  "phone-filled": "\uE230",
-  "compose": "\uE400",
-  "videocam": "\uE300",
-  "trash-filled": "\uE8DC",
-  "download": "\uE403",
-  "chatbubble-filled": "\uE232",
-  "chatbubble": "\uE202",
-  "cloud-download": "\uE8E4",
-  "cloud-upload-filled": "\uE8E5",
-  "cloud-upload": "\uE8E6",
-  "cloud-download-filled": "\uE8E9",
-  "headphones": "\uE8BF",
-  "shop": "\uE609" };exports.default = _default;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.request = request; /**
+                                                                                                       * 封装uniapp的request
+                                                                                                       */
+function request(url, method, data) {
+  var token = '';
+  // console.log(typeof(uni.getStorageSync('token').token))
+  if (typeof uni.getStorageSync('token').token == 'undefined') {
+    token = 'no-token';
+  } else {
+    token = uni.getStorageSync('token').token;
+  }
+  return new Promise(function (resolve, reject) {
+    uni.request({
+      url: url,
+      method: method,
+      data: data,
+      header: {
+        'Content-Type': 'application/json',
+        'X-Token': token },
+
+      success: function success(res) {
+        resolve(res.data);
+      },
+      fail: function fail(err) {
+        uni.showModal({
+          title: '错误',
+          content: '网络请求异常',
+          showCancel: false });
+
+        reject(err);
+      } });
+
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

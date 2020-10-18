@@ -31,6 +31,7 @@ import java.util.List;
 public class ShareController {
     private final ShareService shareService;
     private final JwtOperator jwtOperator;
+    private final int MAX = 100;
 
     @GetMapping(value = "/{id}")
     @CheckLogin
@@ -46,17 +47,10 @@ public class ShareController {
             @RequestParam(required = false, defaultValue = "1") Integer pageNo,
             @RequestParam(required = false, defaultValue = "10") Integer pageSize,
             @RequestHeader(value = "X-Token", required = false) String token) {
-        if (pageSize > 100) {
-            pageSize = 100;
+        if (pageSize > MAX) {
+            pageSize = MAX;
         }
-        Integer userId = null;
-        if (!"no-token".equals(token)) {
-            Claims claims = this.jwtOperator.getClaimsFromToken(token);
-            log.info(claims.toString());
-            userId = (Integer) claims.get("id");
-        } else {
-            log.info("没有token");
-        }
+        int userId = getUserIdFromToken(token);
         return this.shareService.query(title, pageNo, pageSize, userId).getList();
     }
 
@@ -64,16 +58,68 @@ public class ShareController {
     @PostMapping("/contribute")
     @CheckLogin
     @ApiOperation(value = "投稿", notes = "投稿")
-    public int contributeShare(@RequestBody ShareRequestDTO shareRequestDTO) {
-        System.out.println(shareRequestDTO);
+    public int contributeShare(@RequestBody ShareRequestDTO shareRequestDTO, @RequestHeader(value = "X-Token", required = false) String token) {
+        log.info(shareRequestDTO + ">>>>>>>>>>>>");
+        int userId = getUserIdFromToken(token);
+        shareRequestDTO.setUserId(userId);
         return shareService.contribute(shareRequestDTO);
     }
 
     @PostMapping("/exchange")
     @CheckLogin
+    @ApiOperation(value = "兑换分享", notes = "兑换分享")
     public Share exchange(@RequestBody ExchangeDTO exchangeDTO) {
-        System.out.println(exchangeDTO + ">>>>>>>>>>>>");
+        log.info(exchangeDTO + ">>>>>>>>>>>>");
         return this.shareService.exchange(exchangeDTO);
     }
 
+    @GetMapping("/my-exchange")
+    @CheckLogin
+    @ApiOperation(value = "我的兑换", notes = "我的兑换")
+    public List<Share> myExchange(
+            @RequestParam(required = false, defaultValue = "1") Integer pageNo,
+            @RequestParam(required = false, defaultValue = "10") Integer pageSize,
+            @RequestHeader(value = "X-Token", required = false) String token) {
+        if (pageSize > MAX) {
+            pageSize = MAX;
+        }
+        int userId = getUserIdFromToken(token);
+        return this.shareService.myExchange(pageNo, pageSize, userId).getList();
+    }
+
+
+    @GetMapping("/my-contribute")
+    @CheckLogin
+    @ApiOperation(value = "我的投稿", notes = "我的投稿")
+    public List<Share> myContribute(
+            @RequestParam(required = false, defaultValue = "1") Integer pageNo,
+            @RequestParam(required = false, defaultValue = "10") Integer pageSize,
+            @RequestHeader(value = "X-Token", required = false) String token) {
+        if (pageSize > MAX) {
+            pageSize = MAX;
+        }
+        int userId = getUserIdFromToken(token);
+        return this.shareService.myContribute(pageNo, pageSize, userId).getList();
+    }
+
+
+    /**
+     * 封装一个从token中提取userId的方法
+     *
+     * @param token
+     * @return userId
+     */
+    private int getUserIdFromToken(String token) {
+        log.info(">>>>>>>>>>>token" + token);
+        int userId = 0;
+        String noToken = "no-token";
+        if (!noToken.equals(token)) {
+            Claims claims = this.jwtOperator.getClaimsFromToken(token);
+            log.info(claims.toString());
+            userId = (Integer) claims.get("id");
+        } else {
+            log.info("没有token");
+        }
+        return userId;
+    }
 }

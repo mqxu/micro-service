@@ -30,10 +30,10 @@ public interface UserCenterFeignClient {
 
 
     /**
-     * 用户增加积分
+     * 调用用户中心修改用户积分接口
      * @param userAddBonusDTO
      * @return
      */
-    @PutMapping("/users/add-bonus")
-    UserDTO addBonus(@RequestBody UserAddBonusDTO userAddBonusDTO);
+    @PutMapping("/users/update-bonus")
+    UserDTO updateBonus(@RequestBody UserAddBonusDTO userAddBonusDTO);
 }

@@ -26,7 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
     private final UserMapper userMapper;
-    private  final BonusEventLogMapper bonusEventLogMapper;
+    private final BonusEventLogMapper bonusEventLogMapper;
 
     public User findById(Integer id) {
         return this.userMapper.selectByPrimaryKey(id);
@@ -56,13 +56,12 @@ public class UserService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void addBonus(UserAddBonusMsgDTO userAddBonusMsgDTO) {
+    public void updateBonus(UserAddBonusMsgDTO userAddBonusMsgDTO) {
         System.out.println(userAddBonusMsgDTO);
-        // 1. 为用户加积分
+        // 1. 为用户修改积分
         Integer userId = userAddBonusMsgDTO.getUserId();
         Integer bonus = userAddBonusMsgDTO.getBonus();
         User user = this.userMapper.selectByPrimaryKey(userId);
-
         user.setBonus(user.getBonus() + bonus);
         this.userMapper.updateByPrimaryKeySelective(user);
 
@@ -77,5 +76,13 @@ public class UserService {
                         .build()
         );
         log.info("积分添加完毕...");
+    }
+
+    public List<BonusEventLog> getBonusEventLogs(int userId) {
+        Example example = new Example(BonusEventLog.class);
+        example.setOrderByClause("id DESC");
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("userId", userId);
+        return bonusEventLogMapper.selectByExample(example);
     }
 }

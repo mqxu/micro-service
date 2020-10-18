@@ -2,11 +2,12 @@
 	"pages": [{
 			"path": "pages/tabbar/home/home",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
-			"path": "pages/tabbar/post/post",
+			"path": "pages/tabbar/contribute/contribute",
 			"style": {
 				"navigationBarTitleText": "投稿"
 			}
@@ -14,20 +15,59 @@
 		{
 			"path": "pages/tabbar/profile/profile",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": true
 			}
-		}, {
+		},
+		{
 			"path": "pages/home/share-detail/share-detail",
 			"style": {
 				"navigationBarTitleText": "详情"
 			}
-		}, {
+		},
+		{
 			"path": "pages/home/exchange/exchange",
 			"style": {
 				"navigationBarTitleText": "兑换"
 			}
+		},
+		{
+			"path": "pages/profile/my-bonus-log/my-bonus-log",
+			"style": {
+				"navigationBarTitleText": "积分明细",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/profile/my-exchange/my-exchange",
+			"style": {
+				"navigationBarTitleText": "我的兑换",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/profile/my-contribute/my-contribute",
+			"style": {
+				"navigationBarTitleText": "我的投稿",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/profile/audit/audit",
+			"style": {
+				"navigationBarTitleText": "待审核列表",
+				"enablePullDownRefresh": true
+			}
+
+		},
+		{
+			"path": "pages/profile/audit-detail/audit-detail",
+			"style": {
+				"navigationBarTitleText": "资源审核"
+			}
+
 		}
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "share-app",
@@ -46,9 +86,9 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/tabbar/post/post",
-				"iconPath": "static/img/tabbar/post.png",
-				"selectedIconPath": "static/img/tabbar/postactive.png",
+				"pagePath": "pages/tabbar/contribute/contribute",
+				"iconPath": "static/img/tabbar/contribute.png",
+				"selectedIconPath": "static/img/tabbar/contributeactive.png",
 				"text": "投稿"
 			},
 			{
@@ -58,5 +98,8 @@
 				"text": "我的"
 			}
 		]
+	},
+	"app-plus": {
+	    "softinputMode": "adjustResize"
 	}
 }

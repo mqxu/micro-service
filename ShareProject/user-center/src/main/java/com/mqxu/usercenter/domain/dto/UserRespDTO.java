@@ -31,4 +31,9 @@ public class UserRespDTO {
      * 微信昵称
      */
     private String wxNickname;
+
+    /**
+     * 角色
+     */
+    private String roles;
 }

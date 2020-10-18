@@ -1,29 +1,39 @@
 server:
   port: 8081
+logging:
+  level:
+    com.alibaba.nacos: error
+    org.springframework.cloud.sleuth: debug
 spring:
   application:
     name: user-center
+  zipkin:
+    base-url: http://localhost:9411/
+    discoveryClientEnabled: false
+  sleuth:
+    sampler:
+      # 抽样率，默认是0.1（10%）
+      probability: 1.0
   cloud:
     nacos:
       discovery:
-        server-addr: 39.98.143.134:8848
+        server-addr: localhost:8848
+#        server-addr: 39.98.143.134:8848
 #        namespace: 10e5a9a3-05ce-457f-b2a3-02bcfe1b512d
 #        metadata:
 #          instance: cc
 #          hello: world
 #          version: 1.0
 
+
   datasource:
-    url: jdbc:mysql://39.98.143.134:3306/user_center?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/user_center?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+#    url: jdbc:mysql://39.98.143.134:3306/user_center?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
     hikari:
       username: root
-      password: NjuitScs.123
+#      password: HelloWorld.123
       driver-class-name: com.mysql.cj.jdbc.Driver
-      minimum-idle: 10
-      maximum-pool-size: 20
-      idle-timeout: 500000
-      max-lifetime: 540000
-      connection-timeout: 60000
+      password: root
 
 management:
   endpoints:

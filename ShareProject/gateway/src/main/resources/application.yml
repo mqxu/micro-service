@@ -6,7 +6,8 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 39.98.143.134:8848
+        server-addr: localhost:8848
+#        server-addr: 39.98.143.134:8848
     gateway:
       discovery:
         locator:
@@ -24,6 +25,10 @@ spring:
           uri: lb://content-center
           predicates:
             - Path=/notices/**
+        - id: path_route4
+          uri: lb://content-center
+          predicates:
+            - Path=/admin/**
 #        - id: between_route
 #          uri: lb://user-center
 #          predicates:

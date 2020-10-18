@@ -69,7 +69,7 @@ public class AuthAspect {
             // 2. 验证用户角色是否匹配
             HttpServletRequest request = getHttpServletRequest();
             String role = (String) request.getAttribute("role");
-
+            System.out.println(role+">>>>>>>>>>>>>>>>>>>>>>>>");
             MethodSignature signature = (MethodSignature) point.getSignature();
             Method method = signature.getMethod();
             com.mqxu.contentcenter.auth.CheckAuthorization annotation = method.getAnnotation(com.mqxu.contentcenter.auth.CheckAuthorization.class);

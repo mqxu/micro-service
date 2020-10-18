@@ -24,11 +24,35 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.container {
-  padding-top: 40px;
-  text-align: center;
+.header {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 16px;
+  background-color: white;
+  margin-bottom: 30px;
 }
-.container .box {
+.header .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 15px;
+}
+.header .span {
+  margin-top: 10px;
+}
+.header .span button {
+  margin: 10px;
+}
+.no-login {
   margin-top: 20px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -44,55 +68,18 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.container .box .avatar {
+.no-login .avatar {
   width: 150px;
   height: 150px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
-.container .box .info {
+.no-login .info {
   font-size: 16px;
   margin-top: 20px;
   margin-bottom: 30px;
 }
-.container .box button {
+.no-login button {
   background-color: #ec544d;
   color: #ffffff;
-}
-.container .center {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-}
-.container .center .avatar {
-  width: 120px;
-  height: 120px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
-}
-.container .center .line {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.container .center .sign {
-  width: 100px;
-  height: 35px;
-  background-color: #4c9d44;
-  color: #ffffff;
-  margin: 20px;
-  font-size: 15px;
-}
-.item {
-  text-align: left;
-  padding-left: 30px;
-  line-height: 50px;
-  border-bottom: 1px dashed #ddd;
 }
 

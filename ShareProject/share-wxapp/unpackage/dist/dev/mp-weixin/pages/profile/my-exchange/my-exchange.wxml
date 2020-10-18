@@ -1,0 +1,1 @@
+<view><block wx:for="{{shares}}" wx:for-item="share" wx:for-index="index" wx:key="index"><view><my-card vue-id="{{'2c3d5adc-1-'+index}}" share="{{share}}" data-event-opts="{{[['^click',[['gotoDetail',['$0'],[[['shares','',index,'id']]]]]]]}}" bind:click="__e" bind:__l="__l"></my-card></view></block></view>

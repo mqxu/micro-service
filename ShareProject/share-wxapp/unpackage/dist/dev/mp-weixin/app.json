@@ -1,10 +1,15 @@
 {
   "pages": [
     "pages/tabbar/home/home",
-    "pages/tabbar/post/post",
+    "pages/tabbar/contribute/contribute",
     "pages/tabbar/profile/profile",
     "pages/home/share-detail/share-detail",
-    "pages/home/exchange/exchange"
+    "pages/home/exchange/exchange",
+    "pages/profile/my-bonus-log/my-bonus-log",
+    "pages/profile/my-exchange/my-exchange",
+    "pages/profile/my-contribute/my-contribute",
+    "pages/profile/audit/audit",
+    "pages/profile/audit-detail/audit-detail"
   ],
   "subPackages": [],
   "window": {
@@ -26,9 +31,9 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/tabbar/post/post",
-        "iconPath": "static/img/tabbar/post.png",
-        "selectedIconPath": "static/img/tabbar/postactive.png",
+        "pagePath": "pages/tabbar/contribute/contribute",
+        "iconPath": "static/img/tabbar/contribute.png",
+        "selectedIconPath": "static/img/tabbar/contributeactive.png",
         "text": "投稿"
       },
       {

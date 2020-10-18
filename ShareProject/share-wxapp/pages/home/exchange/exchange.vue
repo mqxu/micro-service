@@ -19,50 +19,64 @@
 </template>
 
 <script>
-import { get, request } from '@/utils/request';
+import { request } from '@/utils/request';
 import { SHARE_URL, EXCHANGE_URL, USER_URL } from '@/utils/api';
 export default {
 	data() {
 		return {
-			share: null,
-			wxNickname: ''
+			id: '',
+			share: '',
+			wxNickname: '',
+			userId: ''
 		};
 	},
 	onLoad(option) {
-		let id = option.id;
-		this.getShare(id);
+		this.id = option.id;
+		this.userId = uni.getStorageSync('user').id;
+		this.getShare();
 	},
 	methods: {
-		async getShare(id) {
-			let res = await get(SHARE_URL + '/' + id);
-			console.log(res.data);
+		async getShare() {
+			let id = this.id;
+			uni.showLoading({
+				title: '加载中'
+			});
+			let res = await request(SHARE_URL + `/${id}`, 'GET', {});
+			setTimeout(() => {
+				uni.hideLoading();
+			}, 100);
+			// console.log(res.data);
 			this.share = res.data.share;
 			this.wxNickname = res.data.wxNickname;
 		},
-		exchange() {
-			// console.log('资源id：' + this.share.id);
-			// console.log('用户id：' + uni.getStorageSync('user').id);
-			request(EXCHANGE_URL, 'POST', {
-				userId: uni.getStorageSync('user').id,
-				shareId: this.share.id
+		async exchange() {
+			let self = this;
+			console.log(self.userId + '>>>>>>>>>>>');
+			await request(EXCHANGE_URL, 'POST', {
+				userId: self.userId,
+				shareId: self.share.id
 			}).then(res => {
-				console.log(JSON.stringify(res) + '>>>>>>>>>>>>>');
-				if (res.succ === true) {
-					uni.showToast({
+				request(USER_URL + '/' + self.userId, 'GET', {}).then(res1 => {
+					console.log(res1);
+					//移除原有用户缓存数据，存入新的数据
+					uni.removeStorageSync('user');
+					uni.setStorageSync('user', res1.data);
+					uni.showModal({
 						title: '兑换成功',
-						duration: 2000
+						content: '确定去查看，取消继续兑换',
+						success: function(res) {
+							if (res.confirm) {
+								uni.redirectTo({
+									url: `/pages/home/share-detail/share-detail?id=${self.id}`
+								});
+							} else if (res.cancel) {
+								uni.switchTab({
+									url: '../../tabbar/home/home'
+								});
+							}
+						}
 					});
-					//重新请求用户数据
-					get(USER_URL + '/' + uni.getStorageSync('user').id).then(res => {
-						//移除原有用户缓存数据，存入新的数据
-						uni.removeStorageSync('user');
-						uni.setStorageSync('user', res.data);
-						//跳回首页
-						uni.switchTab({
-							url: '/pages/tabbar/home/home'
-						});
-					});
-				}
+				});
 			});
 		}
 	}

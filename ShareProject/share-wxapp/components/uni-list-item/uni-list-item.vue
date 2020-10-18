@@ -11,7 +11,7 @@
 				<view class="uni-list-item__content">
 					<slot />
 					<text class="uni-list-item__content-title">{{ title }}</text>
-					<text v-if="note" class="uni-list-item__content-note">{{ note }}</text>
+					<text v-if="note" class="uni-list-item__content-note">{{ note.length > 30 ? note.substring(0, 30) + '...' : note }}</text>
 				</view>
 				<view class="uni-list-item__extra">
 					<text v-if="rightText" class="uni-list-item__extra-text">{{ rightText }}</text>

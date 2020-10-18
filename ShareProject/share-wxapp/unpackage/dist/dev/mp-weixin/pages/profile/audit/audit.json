@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "待审核列表",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "uni-list": "/components/uni-list/uni-list",
+    "uni-list-item": "/components/uni-list-item/uni-list-item"
+  }
+}

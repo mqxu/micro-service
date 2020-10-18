@@ -1,0 +1,1 @@
+{"version":3,"sources":["uni-app:///main.js"],"names":["createPage","Page"],"mappings":";;;;;;;;;;kDAAA;AACA;AACA,sN;AACAA,UAAU,CAACC,eAAD,CAAV,C","file":"components/mq-card/mq-card.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './components/mq-card/mq-card.vue'\ncreatePage(Page)"],"sourceRoot":""}

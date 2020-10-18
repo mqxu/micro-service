@@ -14,7 +14,7 @@ class UserServiceTest {
     private UserService userService;
     @Test
     void findById() {
-        User user = userService.findById(1);
+        User user = userService.findById(24);
         System.out.println(user);
     }
 }

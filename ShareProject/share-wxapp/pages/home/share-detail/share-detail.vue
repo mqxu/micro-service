@@ -9,22 +9,30 @@
 </template>
 
 <script>
-import { get } from '@/utils/request';
+import { request } from '@/utils/request';
 import { SHARE_URL } from '@/utils/api';
 export default {
 	data() {
 		return {
-			share: null
+			share: null,
+			id: ''
 		};
 	},
 	onLoad(option) {
-		let id = option.id;
-		console.log(id);
-		this.getShare(id);
+		this.id = option.id;
+		console.log(this.id);
+		this.getShare();
 	},
 	methods: {
-		async getShare(id) {
-			let res = await get(SHARE_URL + '/' + id);
+		async getShare() {
+			let id = this.id;
+			uni.showLoading({
+				title: '加载中'
+			});
+			let res = await request(SHARE_URL + `/${id}`, 'GET', {});
+			setTimeout(() => {
+				uni.hideLoading();
+			}, 100);
 			console.log(res.data);
 			this.share = res.data.share;
 		},

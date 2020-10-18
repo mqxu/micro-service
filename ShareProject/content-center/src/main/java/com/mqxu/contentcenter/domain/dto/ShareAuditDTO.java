@@ -23,4 +23,9 @@ public class ShareAuditDTO {
      * 原因
      */
     private String reason;
+
+    /**
+     * 是否发布显示
+     */
+    private Boolean showFlag;
 }
