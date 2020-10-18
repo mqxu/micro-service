@@ -79,27 +79,38 @@
         </dependency>
 
         <!-- 微服务相关依赖-->
+        <!--nacos服务注册与发现组件-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
+        <!--feign服务调用组件-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
+        <!--sentinel服务容错限流降级-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
 
+        <!--rocketmq消息队列-->
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-spring-boot-starter</artifactId>
             <version>2.1.1</version>
         </dependency>
 
+        <!--调用链监控zipkin，集成了slueth-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
+        <!--swagger相关-->
         <!-- 之所以要排除，是因为如果不排除会报NumberFormatException的警告。 -->
         <!-- 参考：https://github.com/springfox/springfox/issues/2265-->
         <dependency>
@@ -133,10 +144,13 @@
             <version>1.5.21</version>
         </dependency>
 
+        <!--aop切面-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+
+        <!--jwt相关-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -153,11 +167,6 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.10.7</version>
             <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
     </dependencies>
 
@@ -189,8 +198,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-<!--            swagger2markup-maven-plugin 插件的作用是读取 http://localhost:8888/v2/api-docs 的信息，生成ASCIIDOC文档。当然你也可以生成其他格式，比如Markdown等等。-->
-<!--            这款插件还有很多使用姿势，详见 https://github.com/Swagger2Markup/swagger2markup-maven-plugin-->
+            <!--swagger2markup-maven-plugin 插件的作用是读取 http://localhost:8888/v2/api-docs 的信息，生成ASCIIDOC文档。当然你也可以生成其他格式，比如Markdown等等。 -->
+            <!--这款插件还有很多使用姿势，详见 https://github.com/Swagger2Markup/swagger2markup-maven-plugin -->
             <plugin>
                 <groupId>io.github.swagger2markup</groupId>
                 <artifactId>swagger2markup-maven-plugin</artifactId>
@@ -208,8 +217,8 @@
                 </configuration>
             </plugin>
 
-<!--            asciidoctor-maven-plugin 插件同样也有很多姿势，详见：https://github.com/asciidoctor/asciidoctor-maven-plugin-->
-<!--            生成的文件在 src/docs/asciidoc/html -->
+            <!--asciidoctor-maven-plugin 插件同样也有很多姿势，详见：https://github.com/asciidoctor/asciidoctor-maven-plugin-->
+            <!--生成的文件在 src/docs/asciidoc/html  -->
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
@@ -226,10 +235,10 @@
                         <doctype>book</doctype>
                         <toc>left</toc>
                         <toclevels>3</toclevels>
-                        <numbered></numbered>
-                        <hardbreaks></hardbreaks>
-                        <sectlinks></sectlinks>
-                        <sectanchors></sectanchors>
+                        <numbered/>
+                        <hardbreaks/>
+                        <sectlinks/>
+                        <sectanchors/>
                     </attributes>
                 </configuration>
             </plugin>

@@ -1,0 +1,398 @@
+= share-app Swagger文档
+
+
+[[_overview]]
+== Overview
+github地址：https://github.com/mqxu/micro-service
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : API V1.0
+
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : 陶然然
+__Contact Email__ : taoranran@gmail.com
+
+
+=== License information
+[%hardbreaks]
+__License__ : Apache
+__License URL__ : http://www.apache.org/
+__Terms of service__ : Terms of service
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:8081
+__BasePath__ : /
+
+
+=== Tags
+
+* user-hello : User Hello
+* 用户接口 : User Controller
+
+
+
+
+[[_paths]]
+== Resources
+
+[[_user-hello_resource]]
+=== User-hello
+User Hello
+
+
+[[_gethellousingget]]
+==== getHello
+....
+GET /user/hello
+....
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|string
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_5b0ad68a45d0727406020ff99714ad3d]]
+=== 用户接口
+User Controller
+
+
+[[_gentokenusingget]]
+==== 模拟生成token
+....
+GET /users/gen-token
+....
+
+
+===== Description
+模拟生成token
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|string
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_loginusingpost]]
+==== 用户登录
+....
+POST /users/login
+....
+
+
+===== Description
+用户登录
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**loginDTO** +
+__required__|loginDTO|<<_a035d1c92c7dfc06dc1f2371452d68e7,用户登录时的传输对象>>
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_7eda6d017e529889b4c2c3264b630a01,用户登录成功得到的响应对象>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_getbonuseventsusingget]]
+==== 查询积分明细
+....
+GET /users/my-bonus-log
+....
+
+
+===== Description
+查询积分明细
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**X-Token** +
+__optional__|X-Token|string
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_bonuseventlog,BonusEventLog>> > array
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_updatebonususingput]]
+==== 修改用户积分
+....
+PUT /users/update-bonus
+....
+
+
+===== Description
+修改用户积分
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**userAddBonusDTO** +
+__required__|userAddBonusDTO|<<_92abdd77a7b35f554d32e0d4d95c9749,用户添加积分数据传输对象>>
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_user,User>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_finduserbyidusingget]]
+==== 根据id查找用户信息
+....
+GET /users/{id}
+....
+
+
+===== Description
+根据id查找用户信息
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**id** +
+__required__|id|integer (int32)
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_user,User>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
+
+
+[[_definitions]]
+== Definitions
+
+[[_bonuseventlog]]
+=== BonusEventLog
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**createTime** +
+__optional__|string (date-time)
+|**description** +
+__optional__|string
+|**event** +
+__optional__|string
+|**id** +
+__optional__|integer (int32)
+|**userId** +
+__optional__|integer (int32)
+|**value** +
+__optional__|integer (int32)
+|===
+
+
+[[_user]]
+=== User
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**avatarUrl** +
+__optional__|string
+|**bonus** +
+__optional__|integer (int32)
+|**createTime** +
+__optional__|string (date-time)
+|**id** +
+__optional__|integer (int32)
+|**roles** +
+__optional__|string
+|**updateTime** +
+__optional__|string (date-time)
+|**wxId** +
+__optional__|string
+|**wxNickname** +
+__optional__|string
+|===
+
+
+[[_92abdd77a7b35f554d32e0d4d95c9749]]
+=== 用户添加积分数据传输对象
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**bonus** +
+__optional__|积分数|integer (int32)
+|**userId** +
+__optional__|用户id|integer (int32)
+|===
+
+
+[[_7eda6d017e529889b4c2c3264b630a01]]
+=== 用户登录成功得到的响应对象
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**token** +
+__optional__|token对象|<<_605ee20b1caa68c8e671059fad92f8b9,登录成功的Jwt返回对象>>
+|**user** +
+__optional__|用户对象|<<_88856d38985bff7015c03bf60dede097,登录成功的用户数据返回对象>>
+|===
+
+
+[[_a035d1c92c7dfc06dc1f2371452d68e7]]
+=== 用户登录时的传输对象
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**avatarUrl** +
+__optional__|用户头像|string
+|**loginCode** +
+__optional__|临时的code|string
+|**openId** +
+__optional__|微信平台openId|string
+|**wxNickname** +
+__optional__|微信昵称|string
+|===
+
+
+[[_605ee20b1caa68c8e671059fad92f8b9]]
+=== 登录成功的Jwt返回对象
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**expirationTime** +
+__optional__|过期时间|integer (int64)
+|**token** +
+__optional__|token字符串|string
+|===
+
+
+[[_88856d38985bff7015c03bf60dede097]]
+=== 登录成功的用户数据返回对象
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**avatarUrl** +
+__optional__|用户头像地址|string
+|**bonus** +
+__optional__|用户积分|integer (int32)
+|**id** +
+__optional__|用户id|integer (int32)
+|**roles** +
+__optional__|角色|string
+|**wxNickname** +
+__optional__|微信昵称|string
+|===
+
+
+
+
+

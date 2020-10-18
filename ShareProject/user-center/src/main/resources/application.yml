@@ -9,7 +9,7 @@ spring:
     name: user-center
   zipkin:
     base-url: http://localhost:9411/
-    discoveryClientEnabled: false
+    discovery-client-enabled: false
   sleuth:
     sampler:
       # 抽样率，默认是0.1（10%）
@@ -31,9 +31,8 @@ spring:
 #    url: jdbc:mysql://39.98.143.134:3306/user_center?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
     hikari:
       username: root
-#      password: HelloWorld.123
-      driver-class-name: com.mysql.cj.jdbc.Driver
       password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
 
 management:
   endpoints:

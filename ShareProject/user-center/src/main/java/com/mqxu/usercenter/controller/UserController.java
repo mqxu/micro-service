@@ -9,10 +9,12 @@ import com.mqxu.usercenter.domain.entity.User;
 import com.mqxu.usercenter.service.UserService;
 import com.mqxu.usercenter.util.JwtOperator;
 import io.jsonwebtoken.Claims;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +28,9 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping(value = "/users")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Api(tags = "用户接口", value = "提供用户相关的Rest API")
 @Slf4j
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
     private final UserService userService;
     private final WxMaService wxMaService;
@@ -45,6 +48,7 @@ public class UserController {
      * 模拟生成token(假的登录)
      */
     @GetMapping("/gen-token")
+    @ApiOperation(value = "模拟生成token", notes = "模拟生成token")
     public String genToken() {
         Map<String, Object> userInfo = new HashMap<>(3);
         userInfo.put("id", 1);

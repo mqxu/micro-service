@@ -29,10 +29,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!--springboot应用健康状态检查-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -57,17 +60,6 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-spring-boot-starter</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-
         <!--微信小程序Java SDK-->
         <dependency>
             <groupId>com.github.binarywang</groupId>
@@ -82,11 +74,13 @@
             <version>0.1.3.RELEASE</version>
         </dependency>
 
+        <!--aop切面-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <!--以下为jwt相关依赖-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -105,6 +99,7 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!--以下为swagger和html文档生成相关依赖-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -136,10 +131,26 @@
             <version>1.5.21</version>
         </dependency>
 
+
+        <!--nacos服务发现组件-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!--rocketmq消息队列组件-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
+        <!--zipkin调用链监控组件，集成了slueth-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -170,6 +181,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
+            <!--swagger2markup-maven-plugin 插件的作用是读取 http://localhost:8888/v2/api-docs 的信息，生成ASCIIDOC文档。当然你也可以生成其他格式，比如Markdown等等。 -->
+            <!--这款插件还有很多使用姿势，详见 https://github.com/Swagger2Markup/swagger2markup-maven-plugin-->
             <plugin>
                 <groupId>io.github.swagger2markup</groupId>
                 <artifactId>swagger2markup-maven-plugin</artifactId>
@@ -186,6 +199,9 @@
                     </config>
                 </configuration>
             </plugin>
+
+            <!--asciidoctor-maven-plugin 插件同样也有很多姿势，详见：https://github.com/asciidoctor/asciidoctor-maven-plugin-->
+            <!-- 生成的文件在 src/docs/asciidoc/html-->
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>

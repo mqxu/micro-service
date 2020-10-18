@@ -34,6 +34,7 @@ __BasePath__ : /
 
 * 公告接口 : Notice Controller
 * 分享接口 : Share Controller
+* 管理员接口 : Share Admin Controller
 
 
 
@@ -47,14 +48,14 @@ Notice Controller
 
 
 [[_gettopnoticeusingget]]
-==== 查询最新一条公告
+==== 查询最新的一条公告
 ....
-GET /notice/one
+GET /notices/latest
 ....
 
 
 ===== Description
-查询最新一条公告
+查询最新的一条公告
 
 
 ===== Responses
@@ -79,6 +80,180 @@ GET /notice/one
 Share Controller
 
 
+[[_contributeshareusingpost]]
+==== 投稿
+....
+POST /shares/contribute
+....
+
+
+===== Description
+投稿
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**X-Token** +
+__optional__|X-Token|string
+|**Body**|**shareRequestDTO** +
+__required__|shareRequestDTO|<<_b77239e63c112d93f1b7222edcfe43df,分享信息>>
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|integer (int32)
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_exchangeusingpost]]
+==== 兑换分享
+....
+POST /shares/exchange
+....
+
+
+===== Description
+兑换分享
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**exchangeDTO** +
+__required__|exchangeDTO|<<_6b18226c1be78ec91c4b7e37bb0ef89b,兑换传输的数据对象>>
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_c31f48f84ef207e66a03c015a7243b43,分享>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_mycontributeusingget]]
+==== 我的投稿
+....
+GET /shares/my-contribute
+....
+
+
+===== Description
+我的投稿
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**X-Token** +
+__optional__|X-Token|string|
+|**Query**|**pageNo** +
+__optional__|pageNo|integer (int32)|`1`
+|**Query**|**pageSize** +
+__optional__|pageSize|integer (int32)|`10`
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_c31f48f84ef207e66a03c015a7243b43,分享>> > array
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_myexchangeusingget]]
+==== 我的兑换
+....
+GET /shares/my-exchange
+....
+
+
+===== Description
+我的兑换
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**X-Token** +
+__optional__|X-Token|string|
+|**Query**|**pageNo** +
+__optional__|pageNo|integer (int32)|`1`
+|**Query**|**pageSize** +
+__optional__|pageSize|integer (int32)|`10`
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_c31f48f84ef207e66a03c015a7243b43,分享>> > array
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
 [[_queryusingget]]
 ==== 分享列表
 ....
@@ -95,14 +270,14 @@ GET /shares/query
 [options="header", cols=".^2,.^3,.^9,.^4,.^2"]
 |===
 |Type|Name|Description|Schema|Default
+|**Header**|**X-Token** +
+__optional__|X-Token|string|
 |**Query**|**pageNo** +
 __optional__|pageNo|integer (int32)|`1`
 |**Query**|**pageSize** +
 __optional__|pageSize|integer (int32)|`10`
 |**Query**|**title** +
 __optional__|title|string|
-|**Query**|**userId** +
-__optional__|userId|integer (int32)|
 |===
 
 
@@ -161,10 +336,102 @@ __required__|id|integer (int32)
 * `*/*`
 
 
+[[_8234cc6300653c687ba79f9bac6a64e3]]
+=== 管理员接口
+Share Admin Controller
+
+
+[[_auditbyidusingput]]
+==== 管理员审核分享
+....
+PUT /admin/shares/audit/{id}
+....
+
+
+===== Description
+管理员审核分享
+
+
+===== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**id** +
+__required__|id|integer (int32)
+|**Body**|**auditDTO** +
+__required__|auditDTO|<<_998187cbbd3f158d886af0a907bde10b,审核分享的数据传输对象>>
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_c31f48f84ef207e66a03c015a7243b43,分享>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `*/*`
+
+
+[[_getsharesnotyetusingget]]
+==== 待审核分享列表
+....
+GET /admin/shares/list
+....
+
+
+===== Description
+待审核分享列表
+
+
+===== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_c31f48f84ef207e66a03c015a7243b43,分享>> > array
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+===== Produces
+
+* `*/*`
+
+
 
 
 [[_definitions]]
 == Definitions
+
+[[_6b18226c1be78ec91c4b7e37bb0ef89b]]
+=== 兑换传输的数据对象
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**shareId** +
+__optional__|所兑换资源的id|integer (int32)
+|**userId** +
+__optional__|兑换人id|integer (int32)
+|===
+
 
 [[_fa86f1a57d6f758a93cb33b59c015654]]
 === 公告
@@ -222,6 +489,31 @@ __optional__|分享人id|integer (int32)
 |===
 
 
+[[_b77239e63c112d93f1b7222edcfe43df]]
+=== 分享信息
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**author** +
+__optional__|作者|string
+|**cover** +
+__optional__|封面图|string
+|**downloadUrl** +
+__optional__|下载地址|string
+|**isOriginal** +
+__optional__|作者|boolean
+|**price** +
+__optional__|价格|integer (int32)
+|**summary** +
+__optional__|简介|string
+|**title** +
+__optional__|标题|string
+|**userId** +
+__optional__|投稿人id|integer (int32)
+|===
+
+
 [[_b3aa729e321b5a0a8db2802fb0f94751]]
 === 分享详情，带发布人昵称
 
@@ -232,6 +524,21 @@ __optional__|分享人id|integer (int32)
 __optional__|分享资源信息|<<_c31f48f84ef207e66a03c015a7243b43,分享>>
 |**wxNickname** +
 __optional__|发布人昵称|string
+|===
+
+
+[[_998187cbbd3f158d886af0a907bde10b]]
+=== 审核分享的数据传输对象
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**auditStatusEnum** +
+__optional__|审核状态|enum (NOT_YET, PASS, REJECT)
+|**reason** +
+__optional__|原因|string
+|**showFlag** +
+__optional__|是否发布显示|boolean
 |===
 
 

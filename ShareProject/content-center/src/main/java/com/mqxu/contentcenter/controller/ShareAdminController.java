@@ -5,6 +5,7 @@ import com.mqxu.contentcenter.auth.CheckLogin;
 import com.mqxu.contentcenter.domain.dto.ShareAuditDTO;
 import com.mqxu.contentcenter.domain.entity.Share;
 import com.mqxu.contentcenter.service.ShareService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/shares")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Api(tags = "管理员接口", value = "提供管理员相关的Rest API")
 @Slf4j
 public class ShareAdminController {
 

@@ -10,6 +10,7 @@ import com.mqxu.contentcenter.feignclient.TestBaiduFeignClient;
 import com.mqxu.contentcenter.feignclient.TestUserCenterFeignClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -41,6 +43,7 @@ public class TestController {
      * @return 用户中心所有实例列表
      */
     @GetMapping("/discovery")
+    @ApiIgnore
     public List<ServiceInstance> getInstances() {
         // 查询指定服务的所有实例的信息，使用的是Spring Cloud的接口，和具体实现的组件无关
         //consul/eureka/zookeeper都可以使用
@@ -49,6 +52,7 @@ public class TestController {
     }
 
     @GetMapping("/call/hello")
+    @ApiIgnore
     public String callUserCenter() {
         //用户中心所有的实例信息
         List<ServiceInstance> instances = discoveryClient.getInstances("user-center");
@@ -72,6 +76,7 @@ public class TestController {
     }
 
     @GetMapping(value = "/call/ribbon")
+    @ApiIgnore
     public String callByRibbon() {
         return restTemplate.getForObject("http://user-center/user/hello", String.class);
     }
@@ -79,6 +84,7 @@ public class TestController {
     private final TestUserCenterFeignClient testUserCenterFeignClient;
 
     @GetMapping(value = "/test-q")
+    @ApiIgnore
     public UserDTO query(UserDTO userDTO) {
         return testUserCenterFeignClient.query(userDTO);
     }
@@ -92,18 +98,21 @@ public class TestController {
     private final TestService testService;
 
     @GetMapping("/test-a")
+    @ApiIgnore
     public String testA() {
         this.testService.commonMethod();
         return "test-a";
     }
 
     @GetMapping("/test-b")
+    @ApiIgnore
     public String testB() {
         this.testService.commonMethod();
         return "test-b";
     }
 
     @GetMapping("byResource")
+    @ApiIgnore
     @SentinelResource(value = "hello", blockHandler = "handleException")
     public String byResource() {
         return "按名称限流";
